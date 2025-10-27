@@ -1,0 +1,8 @@
+.sidebar_link {
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.sidebar_link:hover {
+    color: var(--font-color-link-hover);
+}

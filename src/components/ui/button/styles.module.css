@@ -1,0 +1,178 @@
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-weight: 600;
+  transition: transform 0.1s ease;
+}
+
+.button_notdisabled:active {
+  transform: translateY(1px) ;
+}
+
+/* VARIANT */
+.button_filled {
+  background: var(--color-6);
+  color: var(--color-white);
+}
+
+.button_filled:hover {
+  background: var(--color-7);
+}
+
+.button_light {
+  background: color-mix(in srgb, var(--color-6) 10%, transparent);
+  color: var(--color-6);
+}
+
+.button_light:hover {
+  background: color-mix(in srgb, var(--color-6) 12%, transparent);
+}
+
+.button_outline {
+  background: transparent;
+  color: var(--color-6);
+  border: calc(0.0625rem * 1) solid var(--color-6);
+}
+
+.button_outline:hover {
+  background: color-mix(in srgb, var(--color-6) 5%, transparent);
+}
+
+.button_subtle {
+  background: transparent;
+  color: var(--color-6);
+}
+
+.button_subtle:hover {
+  background: color-mix(in srgb, var(--color-6) 12%, transparent);
+}
+
+
+
+/* SIZE */
+.button_size__xs {
+    height: calc(1.875rem * 1);
+    padding-left: calc(0.875rem * 1);
+    padding-right: calc(0.875rem * 1);
+    font-size: calc(0.75rem * 1);
+}
+
+.button_size__sm {
+    height: calc(2.25rem * 1);
+    padding-left: calc(1.25rem * 1);
+    padding-right: calc(1.25rem * 1);
+    font-size: calc(0.875rem * 1);
+}
+
+.button_size__md {
+    height: calc(2.625rem * 1);
+    padding-left: calc(1.375rem * 1);
+    padding-right: calc(1.375rem * 1);
+    font-size: calc(1rem * 1);
+}
+
+.button_size__lg {
+    height: calc(3.125rem * 1);
+    padding-left: calc(1.625rem * 1);
+    padding-right: calc(1.625rem * 1);
+    font-size: calc(1.125rem * 1);
+}
+
+.button_size__xl {
+    height: calc(3.75rem * 1);
+    padding-left: calc(2rem * 1);
+    padding-right: calc(2rem * 1);
+    font-size: calc(1.25rem * 1);
+}
+
+.buttonIcon_size__xs {
+  width: calc(1.125rem * 1);
+  height: calc(1.125rem * 1);
+}
+
+.buttonIcon_size__sm {
+  width: calc(1.375rem * 1);
+  height: calc(1.375rem * 1);
+}
+
+.buttonIcon_size__md {
+  width: calc(1.75rem * 1);
+  height: calc(1.75rem * 1);
+}
+
+.buttonIcon_size__lg {
+  width: calc(2.125rem * 1);
+  height: calc(2.125rem * 1);
+}
+
+.buttonIcon_size__xl {
+  width: calc(2.75rem * 1);
+  height: calc(2.75rem * 1);
+}
+
+
+
+
+/* RADIUS */
+.button_radius__xs {
+  border-radius: calc(0.125rem * 1);
+}
+
+.button_radius__sm {
+  border-radius: calc(0.25rem * 1);
+}
+
+.button_radius__md {
+  border-radius: calc(0.5rem * 1);
+}
+
+.button_radius__lg {
+  border-radius: calc(1rem * 1);
+}
+
+.button_radius__xl {
+  border-radius: calc(2rem * 1);
+}
+
+
+
+
+.button_disabled {
+  cursor: not-allowed;
+  color: #adb5bd;
+  background: #e9ecef;
+}
+
+.button_disabled:hover {
+  background: #e9ecef;
+  color: #adb5bd;
+}
+
+.button_loading {
+  cursor: not-allowed;
+  color: #adb5bd;
+  background: #e9ecef;
+}
+
+.button_loading:hover {
+  background: #e9ecef;
+  color: #adb5bd;
+}
+
+
+
+.buttonIcon_content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    height: 100%;
+}
+
+.buttonIcon_content > :global(svg) {
+    width: 70%;
+    height: 70%;
+}
