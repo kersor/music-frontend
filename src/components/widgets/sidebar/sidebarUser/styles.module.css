@@ -1,0 +1,21 @@
+.user {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.names {
+
+}
+
+.names_name {
+    font-size: 16px;
+    line-height: 18px;
+    font-weight: 700;
+}
+
+.names_email {
+    font-size: 14px;
+    line-height: 16px;
+    color: var(--color-7);
+}

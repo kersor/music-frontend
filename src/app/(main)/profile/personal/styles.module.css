@@ -1,0 +1,7 @@
+.profile {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    grid-column: span 3 / span 3;
+    gap: 20px;
+}

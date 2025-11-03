@@ -1,0 +1,8 @@
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    height: inherit;
+    border-right: 1px solid var(--color-3);
+    padding-right: var(--padding-main);
+    gap: 12px;
+}

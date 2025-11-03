@@ -28,7 +28,7 @@ type radius =
 type type = 
     "text" |
     "email" |
-    "passoword" 
+    "password" 
 
 interface Props extends Omit<InputHTMLAttributes<HTMLInputElement>, "size" | "type" | "value"> {
     rootClassName?: string,
@@ -41,7 +41,6 @@ interface Props extends Omit<InputHTMLAttributes<HTMLInputElement>, "size" | "ty
     type?: type
 
     disabled?: boolean
-    isError?: boolean
     error?: string
 
     fullWidth?: boolean
@@ -54,6 +53,7 @@ interface Props extends Omit<InputHTMLAttributes<HTMLInputElement>, "size" | "ty
     value?: string
 
     clearButton?: boolean
+    readOnly?: boolean
 }
 
 const Input = ({
@@ -67,7 +67,6 @@ const Input = ({
     type = "text",
 
     disabled = false,
-    isError = false,
     error,
 
     fullWidth = false,
@@ -81,6 +80,7 @@ const Input = ({
     value = "",
 
     clearButton = false,
+    readOnly = false,
 
     ...otherProps
 }: Props) => {
@@ -130,9 +130,9 @@ const Input = ({
         classNames_radius[radius],
         classNames_ident[size],
         isDisabled ? styles.input_disabled : styles.input_notdisabled,
-        isError && styles.input_error,
+        !!error?.length && styles.input_error,
         (label?.length || description?.length) && 'mt-1' ,
-        isError && 'mb-1' 
+        !!error?.length && 'mb-1' ,
     )
 
     const inputClassNames = clsx(

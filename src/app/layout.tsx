@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./styles/globals.css";
-import Sidebar from "@/components/layout/sidebar/Sidebar";
+import Sidebar from "@/components/layout/sidebar/sidebarMain/SidebarMain";
 import ChooseTrack from "@/components/layout/chooseTrack/ChooseTrack";
+import { QueryClientProvider } from "@tanstack/react-query";
+import { ProviderQueryClient } from "@/providers/ProviderQueryClient";
+import ClientUserLoader from "@/components/layout/clientUserLayout/ClientUserLayout";
 
 const inter = Inter()
 
@@ -20,7 +23,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className} antialiased min-h-screen`}>
-        {children}
+        <ProviderQueryClient>
+          <ClientUserLoader />
+          {children}
+        </ProviderQueryClient>
       </body>
     </html>
   );

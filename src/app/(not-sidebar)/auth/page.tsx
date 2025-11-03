@@ -5,7 +5,7 @@ import { Suspense } from 'react';
 
 export default function Auth () {
     return (
-        <div className={styles.auth}>
+        <div className="relative">
             <Suspense>
                 <AuthWrapper />
             </Suspense>

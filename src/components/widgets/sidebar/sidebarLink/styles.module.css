@@ -1,8 +1,16 @@
 .sidebar_link {
     font-weight: bold;
     transition: color 0.3s ease;
+    padding: 10px;
+    font-size: 14px;
+    width: 100%;
 }
 
 .sidebar_link:hover {
     color: var(--font-color-link-hover);
+}
+
+.activeLink {
+    background: var(--color-2);
+    border-radius: 8px;
 }

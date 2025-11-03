@@ -5,6 +5,12 @@
     margin: 0 auto;
 }
 
+.auth_main {
+    position: absolute;
+    left: 30px;
+    top: 30px;
+}
+
 .wrapper {
     display: flex;
     justify-content: center;

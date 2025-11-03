@@ -1,3 +1,5 @@
+"use client"
+
 import clsx from "clsx"
 import React, { AnchorHTMLAttributes, ButtonHTMLAttributes, MouseEvent, MouseEventHandler, PropsWithChildren } from "react"
 import styles from './styles.module.css'
@@ -108,14 +110,14 @@ export const Button = ({
         }
 
         return (
-            <Link 
+            <a 
                 href={isDisabled ? '' : href}
                 className={commonClassNames}
                 onClick={hanldeClick}
                 {...(otherProps as AnchorHTMLAttributes<HTMLAnchorElement>)}
             >
                 <Content loading={loading}>{children}</Content>
-            </Link>
+            </a>
         )
     }
 
