@@ -3,7 +3,7 @@
 import React, { InputHTMLAttributes } from 'react'
 import styles from './styles.module.css'
 import clsx from 'clsx'
-import { ButtonIcon } from '../button/ButtonIcon'
+import { ButtonIcon } from '../../button/ButtonIcon'
 import { X } from 'lucide-react'
 
 type variant = 

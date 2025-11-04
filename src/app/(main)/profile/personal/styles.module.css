@@ -5,3 +5,21 @@
     grid-column: span 3 / span 3;
     gap: 20px;
 }
+
+.profile_avatar {
+    display: flex;
+    gap: 20;
+    align-items: center;
+}
+
+.profile_avatar__settings {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.profile_avatar__settings_description {
+    font-size: 11px;
+    line-height: 14px;
+    color: var(--color-4);
+}

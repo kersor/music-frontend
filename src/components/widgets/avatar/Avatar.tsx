@@ -40,21 +40,6 @@ const Avatar = ({
 }: Props) => {
     const user = useUser(state => state.user)
 
-    const mutation = useMutation({
-        mutationKey: ['User'],
-        mutationFn: handleSubmit,
-        onSuccess: (data) => {
-            const fileName = data.fileName;
-            
-            if (onChangePhoto) {
-                onChangePhoto(fileName); // отправляем имя файла родителю
-            }
-        },
-        onError: (error: AxiosError) => {
-
-        }
-    })
-
     const classNames_size: Record<size, string> = {
         xs: styles.avatar_size__xs,
         sm: styles.avatar_size__sm, 
@@ -63,17 +48,6 @@ const Avatar = ({
         xl: styles.avatar_size__xl,
         '2xl': styles.avatar_size__2xl,
     }
-
-
-    const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-        const file = e.target.files?.[0];
-        if (!file) return;
-
-        const formData = new FormData();
-        formData.append("file", file);
-
-        await mutation.mutateAsync(formData)
-    };
 
    
     const avatarSrc = user?.avatar || null;
@@ -85,14 +59,6 @@ const Avatar = ({
                 classNames_size[size]
             )}>
                 <span>{user?.name[0]}</span>
-                {
-                    changePhoto && (
-                        <div className={styles.avatar_change}>
-                            <Camera size={20} color='#FFF' />
-                            <input onChange={handleFileChange} className={styles.avatar_file} type="file" />
-                        </div>
-                    )
-                }
             </div>
         )
     }
@@ -107,15 +73,7 @@ const Avatar = ({
                 alt='avatar'
                 fill
                 objectFit='cover'
-            />      
-            {
-                changePhoto && (
-                    <div className={styles.avatar_change}>
-                        <Camera size={20} color='#FFF' />
-                        <input onChange={handleFileChange} className={styles.avatar_file} type="file" />
-                    </div>
-                )
-            }      
+            />           
         </div>
     )
 }

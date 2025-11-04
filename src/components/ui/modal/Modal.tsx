@@ -1,6 +1,6 @@
-import React, { MouseEvent, MouseEventHandler, useEffect, useLayoutEffect, useRef, useState } from 'react'
+import React, { MouseEvent, MouseEventHandler, PropsWithChildren, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import styles from './styles.module.css'
-import Input from '../input/Input'
+import Input from '../inputs/input/Input'
 import { ButtonIcon } from '../button/ButtonIcon'
 import { X } from 'lucide-react'
 import clsx from 'clsx'
@@ -26,8 +26,9 @@ const Modal = ({
     onClose,
 
     title,
-    size = 'md'
-}: Props) => {
+    size = 'md',
+    children
+}: PropsWithChildren<Props>) => {
     const [mounted, setMounted] = useState(false);
     const [active, setActive] = useState(false);
 
@@ -97,7 +98,7 @@ const Modal = ({
                         styles.modal_body,
                         !title?.length && 'pt-5!'
                     )}>
-                        <Input />
+                        {children}
                     </div>
                 </div>
             </div>

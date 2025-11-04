@@ -12,52 +12,92 @@ import { queryClient } from '@/lib/queryClient';
 import { Button } from '@/components/ui/button/Button';
 import PersonalInfo from '@/components/widgets/profile/personalInfo/PersonalInfo';
 import Modal from '@/components/ui/modal/Modal';
-import ModalEditProfile from '@/components/widgets/modal/modalEditProfile/ModalEditProfile';
+import { LogOutIcon, Trash2 } from 'lucide-react';
+import ModalUploadAvatar from '@/components/widgets/modal/modalUploadAvatar/ModalUploadAvatar';
 
 interface UpdateUserPayload {
   id: string;
   data: User;
 }
 
-const handleSubmit = async ({ id, data }: UpdateUserPayload) => {
+const updateUser = async ({ id, data }: UpdateUserPayload) => {
   const { data: response } = await api.patch(`/user/${id}`, data);
   return response;
 }
 
-export default function Personal() {
-  const [isOpen, setIsOpen] = useState(false)
-  const user = useUser(state => state.user)
+// const savePhoto = async (photo: FormData) => {
+//   const {data} = await api.post(
+//     '/upload',
+//     photo
+//   )
   
-  const mutation = useMutation({
+//   return data
+// }
+
+export default function Personal() {
+  const [changeAvatar, setChangeAvatar] = useState(false)
+  const user = useUser(state => state.user)
+
+  const mutationUpdateUser = useMutation({
     mutationKey: ['User'],
-    mutationFn: handleSubmit,
+    mutationFn: updateUser,
     onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ['User'] });
-    },
-    onError: (error: AxiosError) => {
-
     }
   })
 
-  const onChangePhoto = async (fileName: string) => {
+  // const mutationSavePhoto = useMutation({
+  //   mutationKey: ['User'],
+  //   mutationFn: savePhoto,
+  //   onSuccess: (data) => {
+  //       const fileName = data.fileName;
+  //       if (onChangePhoto) onChangePhoto(fileName); // отправляем имя файла родителю
+  //   }
+  // })
+
+  // const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  //     const file = e.target.files?.[0];
+  //     if (!file) return;
+
+  //     const formData = new FormData();
+  //     formData.append("file", file);
+
+  //     await mutationSavePhoto.mutateAsync(formData)
+  // };
+  
+
+  const removeAvatar = async () => {
     if (!user) return
     const payload: User = {
       ...user,
-      avatar: fileName,
+      avatar: null,
     }
-    await mutation.mutateAsync({ id: user.id, data: payload })
+    await mutationUpdateUser.mutateAsync({ id: user.id, data: payload })
   }
   
   return (
     <div className={styles.profile}>
-      <div className='flex gap-5 items-center justify-between'>
-        <Avatar changePhoto onChangePhoto={onChangePhoto} size='md' />
-        <div className='flex gap-2'>
-          <Button size='sm' onClick={() => setIsOpen(prev => true)}>Обновить</Button>
-          <Button size='sm'>Удалить</Button>
+      <div className={styles.profile_avatar}>
+        <Avatar size='lg' />
+        <div className={styles.profile_avatar__settings}>
+          <div className='flex gap-2'>
+            <Button onClick={() => setChangeAvatar(true)} size='xs' classNames='gap-2 items-center'>
+              <div className='-rotate-90'>
+                <LogOutIcon size={15} />
+              </div>
+              Обновить фото
+            </Button>
+            <Button onClick={removeAvatar} variant='outline' size='xs' classNames='gap-2 items-center'>
+              <Trash2 size={15} />
+              Удалить
+            </Button>
+          </div>
+          <div className={styles.profile_avatar__settings_description}>
+            Мы используем PNG, JPEGs и WEBP максимальным размером 5Мb
+          </div>
         </div>
       </div>
-      <ModalEditProfile isOpen={isOpen} onClose={() => setIsOpen(prev => false)}/>
+      <ModalUploadAvatar isOpen={changeAvatar} onClose={() => setChangeAvatar(false)} />
       <PersonalInfo />
       {/* <Button component='a' href='/logout'>Выйти</Button> */}
     </div>

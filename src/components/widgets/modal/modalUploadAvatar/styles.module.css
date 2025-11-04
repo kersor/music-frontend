@@ -1,0 +1,15 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    padding: 20px 0;
+}
+
+.upload_avatar {
+  width: 100%;
+  max-width: 500px;
+  max-height: 500px;
+  overflow: hidden;
+}

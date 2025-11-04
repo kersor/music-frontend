@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useState } from 'react'
 import styles from './styles.module.css'
-import Input from '@/components/ui/input/Input'
+import Input from '@/components/ui/inputs/input/Input'
 import { Button } from '@/components/ui/button/Button'
 import { mode } from './AuthWrapper'
 import { IRegister } from '@/types/auth.type'
