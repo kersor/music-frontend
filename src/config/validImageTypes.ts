@@ -3,5 +3,3 @@ export const validImageMimeTypes = [
     'image/png', 
     'image/webp'
 ]
-
-export const MAX_IMAGE_SIZE_MB = 5

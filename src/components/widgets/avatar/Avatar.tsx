@@ -69,7 +69,7 @@ const Avatar = ({
             classNames_size[size]
         )}>
             <Image 
-                src={`http://localhost:8080/uploads/${avatarSrc}`}
+                src={`http://localhost:8080/uploads/files/photo/${avatarSrc}`}
                 alt='avatar'
                 fill
                 objectFit='cover'

@@ -18,7 +18,7 @@ const ChooseTrack = () => {
       const music = ref.current
       if (!music) return
 
-      
+      console.log(music)
       if (track.options.isPlay) music.play()
       else music.pause()
     }, [track.options.isPlay, track.track])
@@ -167,7 +167,7 @@ const ChooseTrack = () => {
         <audio 
             onTimeUpdate={handleOnTimeUpdate}
             ref={ref}
-            src={track.track?.link}
+            src={`/${track.track?.link}`}
         ></audio>
       </div>
     )

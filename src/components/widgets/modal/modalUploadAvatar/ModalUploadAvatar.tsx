@@ -8,7 +8,8 @@ import { useMutation } from '@tanstack/react-query'
 import { User } from '@/types/auth.type'
 import { queryClient } from '@/lib/queryClient'
 import { useUser } from '@/store/useUser'
-import { MAX_IMAGE_SIZE_MB, validImageMimeTypes } from '@/config/validImageTypes'
+import { validImageMimeTypes } from '@/config/validImageTypes'
+import { MAX_IMAGE_SIZE_MB } from '@/constant/maxSize'
 
 interface UpdateUserPayload {
   id: string;
@@ -150,6 +151,7 @@ const ModalUploadAvatar = ({
                             Выбрать файл
                             <input
                                 type="file"
+                                accept='image/png, image/jpeg, image/webp'
                                 ref={ref}
                                 onChange={handleFileChange}
                                 style={{ display: 'none' }}

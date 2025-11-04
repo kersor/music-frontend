@@ -1,0 +1,12 @@
+.wrapper {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.music_title {
+    font-size: 14px;
+    line-height: 16px;
+    text-align: center;
+}
