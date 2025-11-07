@@ -5,26 +5,13 @@ import Track from '../track/Track'
 import { IMusic } from '@/types/music.type'
 import { useChooseTrack } from '@/store/useChooseTrack'
 
-const TrackList = () => {
-    const [musics, setMusics] = useState<IMusic[]>([
-      {
-          id: "3894y7hfr38942",
-          name: "Berserk: Guts",
-          author: "Eliott Tordo Erhu",
-          link: "2.mp3",
-          image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHeElOl8JW_xRRsceP7C65hSJ8v-JdOkCGUg&s",
-          duration: 215
-      },
-      {
-          id: "894f05h7jgt034pt",
-          name: "паспорт",
-          author: "интакто",
-          link: "интакто - паспорт.mp3",
-          image: "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/0b/db/d4/0bdbd4b8-3837-f5cc-f3dd-1d9420b6ecd5/cover.jpg/600x600bf-60.jpg",
-          duration: 148
-      }
-  ])
-  
+interface Props {
+    musics: IMusic[]
+}
+
+const TrackList = ({
+    musics
+}: Props) => {  
     const trackId = useChooseTrack(state => state.track?.id)
     const actions = useChooseTrack(state => state.actions)
 
@@ -36,11 +23,14 @@ const TrackList = () => {
             actions.togglePlay()
         }
     }, [trackId, actions])
+
+    if (!musics) return
+
   
   return (
     <div>
         {
-            musics.map((music) => (
+            musics.length && musics.map((music) => (
                 <Track
                   key={music.id}
                   music={music}

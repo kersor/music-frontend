@@ -10,3 +10,17 @@
     line-height: 16px;
     text-align: center;
 }
+
+.music_inputs {
+    display: flex;
+    flex-direction: column;
+    max-width: 75%;
+    width: 100%;
+    gap: 20px;
+}
+
+.music_inputs__line {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+}

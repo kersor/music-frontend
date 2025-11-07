@@ -7,16 +7,7 @@ import { useMutation } from '@tanstack/react-query'
 import { User } from '@/types/auth.type'
 import { api } from '@/lib/axios'
 import { queryClient } from '@/lib/queryClient'
-
-interface UpdateUserPayload {
-  id: string;
-  data: User;
-}
-
-const updateUser = async ({ id, data }: UpdateUserPayload) => {
-  const { data: response } = await api.patch(`/user/${id}`, data);
-  return response;
-}
+import { userApi } from '@/lib/api/userApi'
 
 const PersonalInfo = () => {
   const user = useUser(state => state.user)
@@ -30,7 +21,7 @@ const PersonalInfo = () => {
 
   const mutationUpdateUser = useMutation({
       mutationKey: ['User'],
-      mutationFn: updateUser,
+      mutationFn: userApi.updateUser,
       onSuccess: () => {
           queryClient.invalidateQueries({ queryKey: ['User'] });
       }

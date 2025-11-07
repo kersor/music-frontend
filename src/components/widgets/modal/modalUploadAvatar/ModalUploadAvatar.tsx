@@ -10,29 +10,12 @@ import { queryClient } from '@/lib/queryClient'
 import { useUser } from '@/store/useUser'
 import { validImageMimeTypes } from '@/config/validImageTypes'
 import { MAX_IMAGE_SIZE_MB } from '@/constant/maxSize'
-
-interface UpdateUserPayload {
-  id: string;
-  data: User;
-}
+import { uploadApi } from '@/lib/api/uploadApi'
+import { userApi } from '@/lib/api/userApi'
 
 interface Props {
     isOpen: boolean
     onClose: () => void
-}
-
-const savePhoto = async (photo: FormData) => {
-  const {data} = await api.post(
-    '/upload',
-    photo
-  )
-  
-  return data
-}
-
-const updateUser = async ({ id, data }: UpdateUserPayload) => {
-  const { data: response } = await api.patch(`/user/${id}`, data);
-  return response;
 }
 
 const ModalUploadAvatar = ({
@@ -68,7 +51,7 @@ const ModalUploadAvatar = ({
 
     const mutationUpdateUser = useMutation({
         mutationKey: ['User'],
-        mutationFn: updateUser,
+        mutationFn: userApi.updateUser,
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ['User'] });
         }
@@ -77,7 +60,7 @@ const ModalUploadAvatar = ({
     
     const mutationSavePhoto = useMutation({
         mutationKey: ['User'],
-        mutationFn: savePhoto,
+        mutationFn: uploadApi.savePhoto,
         onSuccess: async (data) => {
             if (!user) return
             const fileName = data.fileName

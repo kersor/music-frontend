@@ -22,7 +22,6 @@ api.interceptors.request.use((config) => {
 
 api.interceptors.response.use(
     async function onFulfilled(response) {
-
     return response;
 }, async function onRejected(error: AxiosError) {
     const status = error.status

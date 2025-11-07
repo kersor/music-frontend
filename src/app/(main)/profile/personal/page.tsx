@@ -14,25 +14,7 @@ import PersonalInfo from '@/components/widgets/profile/personalInfo/PersonalInfo
 import Modal from '@/components/ui/modal/Modal';
 import { LogOutIcon, Trash2 } from 'lucide-react';
 import ModalUploadAvatar from '@/components/widgets/modal/modalUploadAvatar/ModalUploadAvatar';
-
-interface UpdateUserPayload {
-  id: string;
-  data: User;
-}
-
-const updateUser = async ({ id, data }: UpdateUserPayload) => {
-  const { data: response } = await api.patch(`/user/${id}`, data);
-  return response;
-}
-
-// const savePhoto = async (photo: FormData) => {
-//   const {data} = await api.post(
-//     '/upload',
-//     photo
-//   )
-  
-//   return data
-// }
+import { userApi } from '@/lib/api/userApi';
 
 export default function Personal() {
   const [changeAvatar, setChangeAvatar] = useState(false)
@@ -40,31 +22,11 @@ export default function Personal() {
 
   const mutationUpdateUser = useMutation({
     mutationKey: ['User'],
-    mutationFn: updateUser,
+    mutationFn: userApi.updateUser,
     onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ['User'] });
     }
   })
-
-  // const mutationSavePhoto = useMutation({
-  //   mutationKey: ['User'],
-  //   mutationFn: savePhoto,
-  //   onSuccess: (data) => {
-  //       const fileName = data.fileName;
-  //       if (onChangePhoto) onChangePhoto(fileName); // отправляем имя файла родителю
-  //   }
-  // })
-
-  // const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-  //     const file = e.target.files?.[0];
-  //     if (!file) return;
-
-  //     const formData = new FormData();
-  //     formData.append("file", file);
-
-  //     await mutationSavePhoto.mutateAsync(formData)
-  // };
-  
 
   const removeAvatar = async () => {
     if (!user) return
@@ -99,7 +61,7 @@ export default function Personal() {
       </div>
       <ModalUploadAvatar isOpen={changeAvatar} onClose={() => setChangeAvatar(false)} />
       <PersonalInfo />
-      {/* <Button component='a' href='/logout'>Выйти</Button> */}
+      <Button component='a' href='/logout'>Выйти</Button>
     </div>
   );
 }

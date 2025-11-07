@@ -13,18 +13,10 @@ import { ToastContainer } from 'react-toastify'
 import { getCookie, setCookie } from '@/utils/cookie/client-cookie'
 import { useRouter } from 'next/navigation'
 import { useUser } from '@/store/useUser'
+import { authApi } from '@/lib/api/authApi'
 
 interface Props {
   handleMode: () => void
-}
-
-const handleSubmit = async (login: ILogin) => {
-  const {data} = await api.post(
-    '/auth/login', 
-    login
-  )
-  
-  return data
 }
 
 const initState = {
@@ -46,7 +38,7 @@ const AuthLogin = ({
     const [errors, setErrors] = useState<ILogin>(initState)
 
     const mutation = useMutation({
-      mutationFn: handleSubmit,
+      mutationFn: authApi.login,
       onSuccess: (data) => {
         const {access_token, ...otherUser} = data
 

@@ -72,7 +72,8 @@ const Track = ({
                 <div className='flex gap-2'>
                     <div className='relative w-10 h-10'>
                         <Image 
-                            src={music.image}
+                            src={`http://localhost:8080/uploads/files/photo/${music.image}`}
+                            // src='https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/0b/db/d4/0bdbd4b8-3837-f5cc-f3dd-1d9420b6ecd5/cover.jpg/600x600bf-60.jpg'
                             alt='photo'
                             fill
                             objectFit='cover' 
@@ -82,7 +83,7 @@ const Track = ({
                     </div>
                     <div className='font-bold'>
                         <div className=' text-[#504f4f]'>{music.name}</div>
-                        <div>{music.author}</div>
+                        <div>{music.author.name}</div>
                     </div>
                 </div>
                 <div className='flex items-center gap-5'>

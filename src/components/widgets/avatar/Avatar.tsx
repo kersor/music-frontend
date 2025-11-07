@@ -24,19 +24,8 @@ interface Props {
     onChangePhoto?: (fileName: string) => void
 }
 
-const handleSubmit = async (photo: FormData) => {
-  const {data} = await api.post(
-    '/upload',
-    photo
-  )
-  
-  return data
-}
-
 const Avatar = ({
     size = "md",
-    changePhoto = false,
-    onChangePhoto
 }: Props) => {
     const user = useUser(state => state.user)
 

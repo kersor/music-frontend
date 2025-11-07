@@ -13,18 +13,10 @@ import { ToastContainer } from 'react-toastify'
 import { setCookie } from '@/utils/cookie/client-cookie'
 import { useUser } from '@/store/useUser'
 import { useRouter } from 'next/navigation'
+import { authApi } from '@/lib/api/authApi'
 
 interface Props {
   handleMode: () => void
-}
-
-const handleSubmit = async (register: IRegister) => {
-  const {data} = await api.post(
-    '/auth/register', 
-    register
-  )
-  
-  return data
 }
 
 const initState = {
@@ -48,7 +40,7 @@ const AuthRegister = ({
   const [errors, setErrors] = useState<IRegister>(initState)
 
   const mutation = useMutation({
-    mutationFn: handleSubmit,
+    mutationFn: authApi.register,
     onSuccess: (data) => {
         const {access_token, ...otherUser} = data
 
@@ -78,7 +70,7 @@ const AuthRegister = ({
     try {
       await schema.validate(register, { abortEarly: false })
       setErrors(prev => initState)
-      await mutation.mutate(register)
+      await mutation.mutateAsync(register)
     } catch (error) {
       if (error instanceof yup.ValidationError) {
         const errors: IRegister = {...initState}

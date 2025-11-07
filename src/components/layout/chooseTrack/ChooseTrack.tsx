@@ -14,6 +14,7 @@ const ChooseTrack = () => {
 
     const track = useChooseTrack(state => state)
 
+    console.log(track)
     useEffect(() => {
       const music = ref.current
       if (!music) return
@@ -99,7 +100,7 @@ const ChooseTrack = () => {
         <div className='flex items-center gap-2'>
           <div className='relative w-20 h-20'>
               <Image
-                  src={track.track?.image}
+                  src={`http://localhost:8080/uploads/files/photo/${track.track.image}`}
                   alt='photo'
                   fill
                   objectFit='cover' 
@@ -108,7 +109,7 @@ const ChooseTrack = () => {
           </div>
           <div className='font-bold'>
               <div className=' text-[#504f4f]'>{track.track?.name}</div>
-              <div>{track.track?.author}</div>
+              <div>{track.track?.author.name}</div>
           </div>
         </div>
         <div className='absolute left-[50%] top-[50%] -translate-x-[50%] -translate-y-[50%]'>
@@ -167,7 +168,7 @@ const ChooseTrack = () => {
         <audio 
             onTimeUpdate={handleOnTimeUpdate}
             ref={ref}
-            src={`/${track.track?.link}`}
+            src={`http://localhost:8080/uploads/files/music/${track.track?.filename}`}
         ></audio>
       </div>
     )
