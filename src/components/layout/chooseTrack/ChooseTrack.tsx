@@ -14,12 +14,10 @@ const ChooseTrack = () => {
 
     const track = useChooseTrack(state => state)
 
-    console.log(track)
     useEffect(() => {
       const music = ref.current
       if (!music) return
 
-      console.log(music)
       if (track.options.isPlay) music.play()
       else music.pause()
     }, [track.options.isPlay, track.track])

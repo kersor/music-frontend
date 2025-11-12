@@ -43,31 +43,31 @@
 }
 
 .avatar_size__xs {
-    width: 40px;
-    height: 40px;
+    width: var(--size-avatar-xs);
+    height: var(--size-avatar-xs);
 }
 
 .avatar_size__sm {
-    width: 60px;
-    height: 60px;
+    width: var(--size-avatar-sm);
+    height: var(--size-avatar-sm);
 }
 
 .avatar_size__md {
-    width: 80px;
-    height: 80px;
+    width: var(--size-avatar-md);
+    height: var(--size-avatar-md);
 }
 
 .avatar_size__lg {
-    width: 100px;
-    height: 100px;
+    width: var(--size-avatar-lg);
+    height: var(--size-avatar-lg);
 }
 
 .avatar_size__xl {
-    width: 120px;
-    height: 120px;
+    width: var(--size-avatar-xl);
+    height: var(--size-avatar-xl);
 }
 
 .avatar_size__2xl {
-    width: 160px;
-    height: 160px;
+    width: var(--size-avatar-2xl);
+    height: var(--size-avatar-2xl);
 }

@@ -1,0 +1,8 @@
+:root {
+    --size-avatar-xs: 40px;
+    --size-avatar-sm: 60px;
+    --size-avatar-md: 80px;
+    --size-avatar-lg: 100px;
+    --size-avatar-xl: 120px;
+    --size-avatar-2xl: 160px;
+}
