@@ -1,5 +1,10 @@
+import styles from './styles.module.css'
+
+
 export default function Concerts () {
     return (
-        <div>123</div>
+        <div>
+            
+        </div>
     )
 }

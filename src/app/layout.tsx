@@ -7,7 +7,9 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { ProviderQueryClient } from "@/providers/ProviderQueryClient";
 import ClientUserLoader from "@/components/layout/clientUserLayout/ClientUserLayout";
 
-const inter = Inter()
+const inter = Inter({
+  subsets: ['cyrillic']
+})
 
 export const metadata: Metadata = {
   title: "Svolochyo Музыка - собираем качественную музыку",

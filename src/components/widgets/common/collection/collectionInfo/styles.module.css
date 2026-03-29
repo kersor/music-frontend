@@ -1,0 +1,29 @@
+.profile_avatar__settings {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.profile_avatar__settings_description {
+    font-size: 11px;
+    line-height: 14px;
+    color: var(--color-4);
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.info_type {
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 16px;
+}
+
+.info_name {
+    font-size: 35px;
+    line-height: 40px;
+    font-weight: 900;
+}

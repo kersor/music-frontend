@@ -8,6 +8,7 @@ import { api } from "@/lib/axios";
 import { useEffect, useState } from "react";
 import { musicApi } from "@/lib/api/musicApi";
 import { getIsAuth } from "@/utils/getIsAuth";
+import InfoEmptyMusic from "@/components/widgets/info/infoEmptyMusic/InfoEmptyMusic";
 
 export default function MyMusic() {
     const [musics, setMusics] = useState([])
@@ -24,8 +25,14 @@ export default function MyMusic() {
     return (
         <div className={styles.wrapper}>
             <SearchAndAddMyMusic />
-            <div className="mt-5">
-                 <TrackList musics={musics} />
+            <div className={styles.content}>
+                {
+                    !musics.length ? (
+                        <InfoEmptyMusic />
+                    ) : (
+                        <TrackList musics={musics} />
+                    )
+                }
             </div>
         </div>
     )

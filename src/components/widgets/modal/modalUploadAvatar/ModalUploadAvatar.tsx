@@ -16,11 +16,13 @@ import { userApi } from '@/lib/api/userApi'
 interface Props {
     isOpen: boolean
     onClose: () => void
+    handleSavePhoto: (file: FormData) => void
 }
 
 const ModalUploadAvatar = ({
     isOpen,
-    onClose
+    onClose,
+    handleSavePhoto
 }: Props) => {
     const user = useUser(state => state.user)
     const [file, setFile] = useState<FormData | null>(null)
@@ -49,40 +51,6 @@ const ModalUploadAvatar = ({
         setPreview(url)
     }
 
-    const mutationUpdateUser = useMutation({
-        mutationKey: ['User'],
-        mutationFn: userApi.updateUser,
-        onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: ['User'] });
-        }
-    })
-
-    
-    const mutationSavePhoto = useMutation({
-        mutationKey: ['User'],
-        mutationFn: uploadApi.savePhoto,
-        onSuccess: async (data) => {
-            if (!user) return
-            const fileName = data.fileName
-
-            const payload: User = {
-                ...user,
-                avatar: fileName,
-            }
-
-            await mutationUpdateUser.mutateAsync({id: user.id, data: payload})
-            resetState()
-            onClose()
-        }
-    })
-
-    const handleSavePhoto = async () => {
-        if (!file) return
-        await mutationSavePhoto.mutateAsync(file)
-    }
-
-    
-
 
     const handleFileOnClick = () => {
         ref.current?.click()
@@ -96,6 +64,12 @@ const ModalUploadAvatar = ({
     const handleClose = () => {
         onClose()
         resetState()
+    }
+
+    const handleSave = () => {
+        if (!file) return
+        handleSavePhoto(file)
+        handleClose()
     }
     
 
@@ -125,7 +99,7 @@ const ModalUploadAvatar = ({
                             </div>
 
                             <div className='flex gap-3 justify-center mt-10'>
-                                <Button onClick={handleSavePhoto}>Сохранить и продолжить</Button>
+                                <Button onClick={handleSave}>Сохранить и продолжить</Button>
                                 <Button onClick={resetState}>Вернуться назад</Button>
                             </div>
                         </div>

@@ -2,6 +2,7 @@
 
 import ChooseTrack from "@/components/layout/chooseTrack/ChooseTrack";
 import { Button } from "@/components/ui/button/Button";
+import InfoEmptyMusic from "@/components/widgets/info/infoEmptyMusic/InfoEmptyMusic";
 import Track from "@/components/widgets/track/Track";
 import TrackList from "@/components/widgets/trackList/TrackList";
 import { musicApi } from "@/lib/api/musicApi";
@@ -22,8 +23,14 @@ export default function Home() {
   }, [data])
 
   return (
-    <div>
-      <TrackList musics={musics}/>
+    <div className="h-full">
+      {
+        !musics.length ? (
+          <InfoEmptyMusic />
+        ) : (
+          <TrackList musics={musics}/>
+        )
+      }
     </div>
   );
 }

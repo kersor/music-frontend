@@ -1,0 +1,13 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 100%;
+}
+
+.info {
+    color: var(--color-7);
+    font-weight: 900;
+    font-size: 25px;
+}

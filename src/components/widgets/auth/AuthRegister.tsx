@@ -28,7 +28,7 @@ const initState = {
 const schema = yup.object({
   email: yup.string().email('Некорректный Email').required('Введите Email'),
   password: yup.string().min(6, 'Минимум 6 символов').required('Введите пароль'),
-  name: yup.string().min(3, 'Минимум 3 символа').required('Введите имя'),
+  name: yup.string().min(3, 'Минимум 3 символа').max(10, 'Максимум 10 символов').required('Введите имя'),
 })
 
 const AuthRegister = ({

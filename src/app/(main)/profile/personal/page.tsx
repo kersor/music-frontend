@@ -15,6 +15,7 @@ import Modal from '@/components/ui/modal/Modal';
 import { LogOutIcon, Trash2 } from 'lucide-react';
 import ModalUploadAvatar from '@/components/widgets/modal/modalUploadAvatar/ModalUploadAvatar';
 import { userApi } from '@/lib/api/userApi';
+import { uploadApi } from '@/lib/api/uploadApi';
 
 export default function Personal() {
   const [changeAvatar, setChangeAvatar] = useState(false)
@@ -36,7 +37,29 @@ export default function Personal() {
     }
     await mutationUpdateUser.mutateAsync({ id: user.id, data: payload })
   }
+
+  const mutationSavePhoto = useMutation({
+      mutationKey: ['User'],
+      mutationFn: uploadApi.savePhoto,
+      onSuccess: async (data) => {
+          if (!user) return
+          const fileName = data.fileName
+
+          const payload: User = {
+              ...user,
+              avatar: fileName,
+          }
+
+          await mutationUpdateUser.mutateAsync({id: user.id, data: payload})
+      }
+  })
+
+    const handleSavePhoto = async (file: FormData) => {
+        await mutationSavePhoto.mutateAsync(file)
+    }
+
   
+    
   return (
     <div className={styles.profile}>
       <div className={styles.profile_avatar}>
@@ -59,7 +82,11 @@ export default function Personal() {
           </div>
         </div>
       </div>
-      <ModalUploadAvatar isOpen={changeAvatar} onClose={() => setChangeAvatar(false)} />
+      <ModalUploadAvatar
+        isOpen={changeAvatar}
+        onClose={() => setChangeAvatar(false)}
+        handleSavePhoto={handleSavePhoto}
+      />
       <PersonalInfo />
       <Button component='a' href='/logout'>Выйти</Button>
     </div>
