@@ -63,7 +63,7 @@ export default function Personal() {
   return (
     <div className={styles.profile}>
       <div className={styles.profile_avatar}>
-        <Avatar size='lg' />
+        <Avatar size='lg'  />
         <div className={styles.profile_avatar__settings}>
           <div className='flex gap-2'>
             <Button onClick={() => setChangeAvatar(true)} size='xs' classNames='gap-2 items-center'>

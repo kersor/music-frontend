@@ -17,15 +17,18 @@ export default function Collection () {
     const id = params.id
 
     const {data} = useQuery({
-        queryKey: ['Collection'],
-        queryFn: () => collectionApi.getMyPlaylist(id),
+        queryKey: ['Collection', id],
+        queryFn: () => collectionApi.getMyPlaylist(id as string),
         enabled: !!id
     });
 
     useEffect(() => {
         if (data) setCollection(data)
+        
+        return () => {
+            setCollection(null)
+        }
     }, [data])
-    console.log(collection?.image)
 
     if (!collection) return null
 

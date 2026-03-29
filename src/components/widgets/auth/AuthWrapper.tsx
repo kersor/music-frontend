@@ -1,6 +1,5 @@
 "use client"
 
-import React, { useState } from 'react'
 import AuthLogin from './AuthLogin'
 import styles from './styles.module.css'
 import AuthRegister from './AuthRegister'
@@ -10,7 +9,7 @@ import { ArrowLeft } from 'lucide-react'
 
 export type mode = 
   "login" |
-  "regoster" 
+  "register" 
 
 const AuthWrapper = () => {
   const router = useRouter()

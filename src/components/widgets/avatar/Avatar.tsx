@@ -1,14 +1,10 @@
 "use client"
 
-import React, { useState } from 'react'
+import React from 'react'
 import styles from "./styles.module.css";
 import { useUser } from '@/store/useUser';
 import Image from 'next/image';
 import clsx from 'clsx';
-import { Camera } from 'lucide-react';
-import { api } from '@/lib/axios';
-import { useMutation } from '@tanstack/react-query';
-import { AxiosError } from 'axios';
 
 type size = 
     "xs" |
@@ -39,7 +35,7 @@ const Avatar = ({
     }
 
    
-    const avatarSrc = user?.avatar || null;
+    const avatarSrc = `${process.env.NEXT_PUBLIC_BASE_URL}${process.env.NEXT_PUBLIC_BASE_MEDIA}/${user?.avatar}` || '/photo/avatar-default.svg';
 
     if (!user?.avatar) {
         return (
@@ -58,7 +54,7 @@ const Avatar = ({
             classNames_size[size]
         )}>
             <Image 
-                src={`http://localhost:8080/uploads/files/photo/${avatarSrc}`}
+                src={avatarSrc}
                 alt='avatar'
                 fill
                 objectFit='cover'

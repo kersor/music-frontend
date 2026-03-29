@@ -7,9 +7,10 @@ import Collecetion from '../collection/Collecetion'
 import { useQuery } from '@tanstack/react-query'
 import { collectionApi } from '@/lib/api/collectionApi'
 import InfoEmptyMusic from '../info/infoEmptyMusic/InfoEmptyMusic'
+import { ICollection } from '@/types/collection.type'
 
 const CollectionList = () => {
-    const [collections, setCollections] = useState([])
+    const [collections, setCollections] = useState<ICollection[]>([])
 
     const {data} = useQuery({
         queryKey: ['Collection'],
@@ -25,7 +26,7 @@ const CollectionList = () => {
             <CollectionCreate />
             {
                 !!collections.length &&
-                    collections.map((playlist: any) => (
+                    collections.map((playlist: ICollection) => (
                         <Collecetion key={playlist.id} collection={playlist} />
                     ))
             }

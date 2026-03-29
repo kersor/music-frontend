@@ -1,15 +1,14 @@
 import { ReactNode, Suspense } from 'react';
-import styles from './styles.module.css'
 import AuthAside from '@/components/widgets/auth/AuthAside';
 
 export default function AuthLayout({ children }: { children: ReactNode }) {
 
   return (
-      <main className="page-auth">
-        <Suspense>
+      <Suspense fallback={<div>Loading...</div>}>
+        <main className="page-auth">
           <AuthAside />
-        </Suspense>
-        {children}
-      </main>
+          {children}
+        </main>
+      </Suspense>
   );
 }
