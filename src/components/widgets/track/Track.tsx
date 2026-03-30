@@ -1,23 +1,37 @@
-import { Heart, Pause, Play } from 'lucide-react'
+import { ChevronRight, EllipsisVertical, Heart, Pause, Play } from 'lucide-react'
 import Image from 'next/image'
-import React, { memo, useEffect, useRef, useState } from 'react'
+import React, { memo, useState } from 'react'
 import styles from './styles.module.css'
 import { IMusic } from '@/types/music.type'
 import { useChooseTrack } from '@/store/useChooseTrack'
 import clsx from 'clsx'
 import { formatTime } from '@/utils/format/formatTime'
+import { ButtonIcon } from '@/components/ui/button/ButtonIcon'
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuSub,
+    DropdownMenuSubContent,
+    DropdownMenuSubTrigger,
+    DropdownMenuTrigger
+} from '@/components/ui/dropdown-menu/DropdownMenu'
 
 interface Props {
+    collections: any[]
     music: IMusic
     playlist: IMusic[]
     funncTogglePlay: (music: IMusic, playlist: IMusic[]) => void
 }
 
 const Track = ({
+    collections,
     music,
     playlist,
     funncTogglePlay
-}: Props) => {    
+}: Props) => {
+    const [isHover, setIsHover] = useState(false)
+    const [isMenuOpen, setIsMenuOpen] = useState(false)
     const trackId = useChooseTrack(state => state.track?.id)
     const isPlay = useChooseTrack(state => state.options.isPlay)
 
@@ -32,51 +46,52 @@ const Track = ({
                     </div>
                 </button>
             )
-        } else {
-            
-            return (
-                <button onClick={() => funncTogglePlay(music, playlist)} className={
-                    clsx(
-                        styles.track_icon,
-                        trackId === music.id
-                            && styles.track_icon__visible 
-                    )
-                }>
-                    {/* Play */}
-                    <div className={clsx(
+        }
+
+        return (
+            <button
+                onClick={() => funncTogglePlay(music, playlist)}
+                className={clsx(
+                    styles.track_icon,
+                    trackId === music.id && styles.track_icon__visible
+                )}
+            >
+                <div
+                    className={clsx(
                         styles.track_icon__play,
                         'rounded-full bg-white',
                         isPlay ? 'opacity-100' : 'opacity-0'
-                    )}>
-                        <div className={styles.track_icon__circle_inner} />
-                    </div>
+                    )}
+                >
+                    <div className={styles.track_icon__circle_inner} />
+                </div>
 
-                    {/* Hover/Static */}
-                    <div className={
-                        clsx(
-                            styles.track_icon__hst,
-                            !isPlay && 'bg-white rounded-full'
-                        )
-                    }>
-                        {isPlay ? <Pause size={15} /> : <Play size={15} />}
-                    </div>
-
-                </button>
-            )
-        }
+                <div
+                    className={clsx(
+                        styles.track_icon__hst,
+                        !isPlay && 'bg-white rounded-full'
+                    )}
+                >
+                    {isPlay ? <Pause size={15} /> : <Play size={15} />}
+                </div>
+            </button>
+        )
     }
 
     return (
-        <div className={styles.track}>
-            <div className='flex items-center text-sm justify-between'>
+        <div
+            onMouseEnter={() => setIsHover(true)}
+            onMouseLeave={() => setIsHover(false)}
+            className={styles.track}
+        >
+            <div className='grid grid-cols-[90%_10%] items-center text-sm justify-between relative'>
                 <div className='flex gap-2'>
                     <div className='relative w-10 h-10'>
-                        <Image 
-                            src={`http://localhost:8080/uploads/files/photo/${music.image}`}
-                            // src='https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/0b/db/d4/0bdbd4b8-3837-f5cc-f3dd-1d9420b6ecd5/cover.jpg/600x600bf-60.jpg'
+                        <Image
+                            src={`${process.env.NEXT_PUBLIC_BASE_URL}${process.env.NEXT_PUBLIC_BASE_MEDIA}/${music.image}`}
                             alt='photo'
                             fill
-                            objectFit='cover' 
+                            objectFit='cover'
                             className='rounded-md'
                         />
                         <IconPlay />
@@ -88,7 +103,49 @@ const Track = ({
                 </div>
                 <div className='flex items-center gap-5'>
                     <Heart size={20} />
-                    <div className='font-bold'>{time}</div>
+                    <div className={styles.track_actions}>
+                        <div
+                            className={clsx(
+                                styles.track_time,
+                                (isHover || isMenuOpen) ? styles.track_time__hidden : styles.track_time__visible
+                            )}
+                        >
+                            {time}
+                        </div>
+                        <div
+                            className={clsx(
+                                styles.track_menu,
+                                (isHover || isMenuOpen) ? styles.track_menu__visible : styles.track_menu__hidden
+                            )}
+                        >
+                            <DropdownMenu open={isMenuOpen} onOpenChange={setIsMenuOpen}>
+                                <DropdownMenuTrigger asChild>
+                                    <ButtonIcon size='md' classNames='rounded-lg!'>
+                                        <div>
+                                            <EllipsisVertical size={18} />
+                                        </div>
+                                    </ButtonIcon>
+                                </DropdownMenuTrigger>
+
+                                <DropdownMenuContent align='end' >
+                                    <DropdownMenuSub>
+                                        <DropdownMenuSubTrigger className='min-w-[250px]'>
+                                            Добавить в плейлист<ChevronRight />
+                                        </DropdownMenuSubTrigger>
+                                        <DropdownMenuSubContent>
+                                            {
+                                                collections && !!collections.length && (
+                                                    collections.map(c => (
+                                                        <DropdownMenuItem key={c.id}>{c.name}</DropdownMenuItem>
+                                                    ))
+                                                )
+                                            }
+                                        </DropdownMenuSubContent>
+                                    </DropdownMenuSub>
+                                </DropdownMenuContent>
+                            </DropdownMenu>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

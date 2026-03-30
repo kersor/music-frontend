@@ -13,9 +13,7 @@ export const collectionApi = {
     },
 
     getMyPlaylist: async (id: string) => {
-        console.log(id)
         const {data} = await api.get(`/collection/${id}`)
-        console.log(data)
         return data
     },
 

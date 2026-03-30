@@ -89,13 +89,13 @@ export const ButtonIcon = ({
     const isDisabled = disabled || loading;
 
     const commonClassNames = clsx(
-        classNames,
         styles.button,
         classNames_variant[variant],
         classNames_size[size],
         classNames_radius[radius],
         fullWidth && 'flex-1',
-        isDisabled ? styles.button_disabled : styles.button_notdisabled
+        isDisabled ? styles.button_disabled : styles.button_notdisabled,
+        classNames
     )
 
     if (component === "a") {
