@@ -5,13 +5,17 @@ import { Button } from "@/components/ui/button/Button";
 import InfoEmptyMusic from "@/components/widgets/info/infoEmptyMusic/InfoEmptyMusic";
 import Track from "@/components/widgets/track/Track";
 import TrackList from "@/components/widgets/trackList/TrackList";
+import { collectionApi } from "@/lib/api/collectionApi";
 import { musicApi } from "@/lib/api/musicApi";
-import { useQuery } from "@tanstack/react-query";
+import { queryClient } from "@/lib/queryClient";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
 export default function Home() {
   const [musics, setMusics] = useState([])
+
+
 
   const {data} = useQuery({
       queryKey: ['Music'],

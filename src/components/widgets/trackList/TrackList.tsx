@@ -1,11 +1,13 @@
 "use client"
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import styles from './styles.module.css'
 import Track from '../track/Track'
 import { IMusic } from '@/types/music.type'
 import { useChooseTrack } from '@/store/useChooseTrack'
-import { useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery } from '@tanstack/react-query'
 import { collectionApi } from '@/lib/api/collectionApi'
+import { queryClient } from '@/lib/queryClient'
+import { useRouter } from 'next/navigation'
 
 interface Props {
     musics: IMusic[]
@@ -14,6 +16,7 @@ interface Props {
 const TrackList = ({
     musics
 }: Props) => { 
+    const router = useRouter()
     const [collections, setCollections] = useState<any[]>([])
     
     const trackId = useChooseTrack(state => state.track?.id)
@@ -24,12 +27,19 @@ const TrackList = ({
         queryFn: collectionApi.getMyPlaylists,
     })
 
+    
+    const {mutateAsync} = useMutation({
+        mutationFn: collectionApi.create,
+        onSuccess: (data) => {
+            queryClient.invalidateQueries({ queryKey: ['Collection'] });
+        }
+    })
+
     useEffect(() => {
         if (!data) return
 
         setCollections(data)
     }, [data])
-
 
 
     const funncTogglePlay = React.useCallback((music: IMusic, playlist: IMusic[]) => {
@@ -40,9 +50,29 @@ const TrackList = ({
         }
     }, [trackId, actions])
 
+    const funcCreateNewCollection = useCallback(async () => {
+        try {
+            const result = await mutateAsync()
+            console.log(result)
+            router.push(`/collection/${result.id}`)
+        } catch (error) {
+            console.log('Error: ', error)
+        }        
+    }, [mutateAsync, router])
+
+    const funcAddMusicInCollection = useCallback(async (collectionId: string, musicId: string) => {
+        try {
+            await collectionApi.addMusicInCollection(collectionId, musicId)
+
+            router.push(`/collection/${collectionId}`)
+        } catch (error) {
+            console.log('Error: ', error)
+        }        
+    }, [router])
+
+
     if (!musics) return
 
-  
     return (
         <div>
             {
@@ -53,6 +83,8 @@ const TrackList = ({
                         playlist={musics}
                         funncTogglePlay={funncTogglePlay}
                         collections={collections}
+                        funcCreateNewCollection={funcCreateNewCollection}
+                        funcAddMusicInCollection={funcAddMusicInCollection}
                     />
                 ))
             }

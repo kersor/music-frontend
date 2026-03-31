@@ -1,4 +1,4 @@
-import { ChevronRight, EllipsisVertical, Heart, Pause, Play } from 'lucide-react'
+import { ChevronRight, EllipsisVertical, Heart, Pause, Play, Plus } from 'lucide-react'
 import Image from 'next/image'
 import React, { memo, useState } from 'react'
 import styles from './styles.module.css'
@@ -22,13 +22,17 @@ interface Props {
     music: IMusic
     playlist: IMusic[]
     funncTogglePlay: (music: IMusic, playlist: IMusic[]) => void
+    funcCreateNewCollection: () => void
+    funcAddMusicInCollection: (collectionId: string, musicId: string) => void
 }
 
 const Track = ({
     collections,
     music,
     playlist,
-    funncTogglePlay
+    funncTogglePlay,
+    funcCreateNewCollection,
+    funcAddMusicInCollection
 }: Props) => {
     const [isHover, setIsHover] = useState(false)
     const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -130,16 +134,18 @@ const Track = ({
                                 <DropdownMenuContent align='end' >
                                     <DropdownMenuSub>
                                         <DropdownMenuSubTrigger className='min-w-[250px]'>
-                                            Добавить в плейлист<ChevronRight />
+                                            Добавить в плейлист <ChevronRight />
                                         </DropdownMenuSubTrigger>
                                         <DropdownMenuSubContent>
-                                            {
-                                                collections && !!collections.length && (
-                                                    collections.map(c => (
-                                                        <DropdownMenuItem key={c.id}>{c.name}</DropdownMenuItem>
-                                                    ))
-                                                )
-                                            }
+                                            {collections.length > 0 ? (
+                                                collections.map(c => (
+                                                    <DropdownMenuItem onClick={() => {
+                                                        funcAddMusicInCollection(c.id, music.id)
+                                                    }} key={c.id}>{c.name}</DropdownMenuItem>
+                                                ))
+                                            ) : (
+                                                <DropdownMenuItem onClick={funcCreateNewCollection} className='flex min-w-[250px]'> <Plus /> Добавить новый плейлист</DropdownMenuItem>
+                                            )}
                                         </DropdownMenuSubContent>
                                     </DropdownMenuSub>
                                 </DropdownMenuContent>

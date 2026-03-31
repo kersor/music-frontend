@@ -21,5 +21,15 @@ export const collectionApi = {
         console.log(payload)
         const {data} = await api.patch(`/collection/${payload.id}`, payload)
         return data
+    },
+
+    addMusicInCollection: async (collectionId: string, musicId: string) => {
+        const {data} = await api.post(`/collection/${collectionId}/add-music/${musicId}`)
+        return data
+    },
+
+    getAllMusicInCollection: async (collectionId: string) => {
+        const {data} = await api.get(`/collection/${collectionId}/musics`)
+        return data
     }
 }
