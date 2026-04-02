@@ -108,7 +108,7 @@ const AuthRegister = ({
           <Input type='password' error={errors.password} clearButton onChange={(e: ChangeEvent<HTMLInputElement>) => handleOnChange('password', e.target.value)} value={register.password} label='Пароль' />
         </div>
         <div className={styles.button}>
-          <Button onClick={handle} fullWidth>Зарегестрироваться</Button>
+          <Button onClick={handle}>Зарегестрироваться</Button>
           <div className={styles.hepler}>
             Есть аккаунт? <span onClick={handleMode}>Войти</span>
           </div>

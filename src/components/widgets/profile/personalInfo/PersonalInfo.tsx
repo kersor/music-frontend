@@ -8,6 +8,7 @@ import { User } from '@/types/auth.type'
 import { api } from '@/lib/axios'
 import { queryClient } from '@/lib/queryClient'
 import { userApi } from '@/lib/api/userApi'
+import { Spinner } from '@/components/ui/spinner'
 
 const PersonalInfo = () => {
   const user = useUser(state => state.user)
@@ -60,7 +61,10 @@ const PersonalInfo = () => {
           <Input onChange={e => handleUser("phone", e.target.value)} value={initUser?.phone} label='Номер телефона'/>
       </div>
       <div className={styles.buttons}>
-        <Button loading={mutationUpdateUser.isPending} onClick={onClickUpdateUser} size='xs'>Обновить данные</Button>
+        <Button disabled={mutationUpdateUser.isPending} onClick={onClickUpdateUser} size='xs'>
+          Обновить данные
+          {mutationUpdateUser.isPending && <Spinner data-icon="inline-start" />}
+        </Button>
         <Button variant='outline' size='xs'>Удалить</Button>
       </div>
     </div>

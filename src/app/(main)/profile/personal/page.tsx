@@ -16,6 +16,7 @@ import { LogOutIcon, Trash2 } from 'lucide-react';
 import ModalUploadAvatar from '@/components/widgets/modal/modalUploadAvatar/ModalUploadAvatar';
 import { userApi } from '@/lib/api/userApi';
 import { uploadApi } from '@/lib/api/uploadApi';
+import Link from 'next/link';
 
 export default function Personal() {
   const [changeAvatar, setChangeAvatar] = useState(false)
@@ -88,7 +89,9 @@ export default function Personal() {
         handleSavePhoto={handleSavePhoto}
       />
       <PersonalInfo />
-      <Button component='a' href='/logout'>Выйти</Button>
+      <Button >
+        <Link href='/logout'>Выйти</Link>
+      </Button>
     </div>
   );
 }

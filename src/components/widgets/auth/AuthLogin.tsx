@@ -105,7 +105,7 @@ const AuthLogin = ({
             <Input type='password' error={errors.password} clearButton onChange={(e: ChangeEvent<HTMLInputElement>) => handleOnChange('password', e.target.value)} value={login.password} label='Пароль' />
           </div>
           <div className={styles.button}>
-            <Button onClick={handle} fullWidth>Войти</Button>
+            <Button onClick={handle}>Войти</Button>
             <div className={styles.hepler}>
               Нет аккаунта? <span onClick={handleMode}>Регистрация</span>
             </div>

@@ -1,10 +1,10 @@
 import React, { MouseEvent, MouseEventHandler, PropsWithChildren, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import styles from './styles.module.css'
 import Input from '../inputs/input/Input'
-import { ButtonIcon } from '@/components/ui/button'
 import { X } from 'lucide-react'
 import clsx from 'clsx'
 import ReactDOM from "react-dom";
+import { Button } from '../button'
 
 type size = 
     | 'xs'
@@ -88,9 +88,9 @@ const Modal = ({
                                 <div className={styles.modal_title}>
                                     {title}
                                 </div>
-                                <ButtonIcon onClick={() => onClose()} variant='subtle'>
+                                <Button onClick={() => onClose()} >
                                     <X />
-                                </ButtonIcon>
+                                </Button>
                             </div>
                         )
                     }

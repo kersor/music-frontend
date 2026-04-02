@@ -3,6 +3,7 @@
 import { Button } from '@/components/ui/button';
 import styles from './styles/styles.module.css'
 import { LoaderCircle } from "lucide-react";
+import Link from 'next/link';
 
 export default function NotFound () {
     return (
@@ -13,7 +14,9 @@ export default function NotFound () {
                     Попробуйте поискать в этом разделе
                 </div>
                 <div className='mt-5'>
-                    <Button size="md" radius="xl" component='a' href='/'>Главная</Button>
+                    <Button>
+                        <Link href='/'>Главная</Link>
+                    </Button>
                 </div>
             </div>
         </div>

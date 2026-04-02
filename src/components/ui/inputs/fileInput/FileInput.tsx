@@ -3,8 +3,8 @@
 import React, { InputHTMLAttributes, MouseEvent, MouseEventHandler, useRef } from 'react'
 import styles from './styles.module.css'
 import clsx from 'clsx'
-import { ButtonIcon } from '@/components/ui/button'
 import { X } from 'lucide-react'
+import { Button } from '../../button'
 
 type variant = 
     "default" |
@@ -226,9 +226,9 @@ const FileInput = ({
                 
                     {(clearButton && value?.get('file')) && (
                         <div className={clsx(classNames_ident[size])}>
-                            <ButtonIcon onClick={handleClearValue} size={size} variant="subtle">
+                            <Button onClick={handleClearValue} >
                                 <X />
-                            </ButtonIcon>
+                            </Button>
                         </div>
                     )}
 

@@ -17,6 +17,7 @@ import * as yup from 'yup'
 import Alert from '@/components/ui/alert/Alert'
 import { alertEmmiter } from '@/lib/alert'
 import { queryClient } from '@/lib/queryClient'
+import { Spinner } from '@/components/ui/spinner'
 
 interface Props {
     isOpen: boolean
@@ -214,8 +215,9 @@ const ModalUploadMusic = ({
                         />
                     </div>
                 </div>
-                <Button loading={isLoading} onClick={handleChooseFile}>
+                <Button disabled={isLoading} onClick={handleChooseFile}>
                     Выбрать файл
+                    {isLoading && <Spinner data-icon="inline-start" />}
                 </Button>
                 <input accept="audio/mpeg" ref={ref} onChange={handleChangeFile} type='file' style={{display: 'none'}} />
             </div>

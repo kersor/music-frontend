@@ -4,8 +4,8 @@ import AuthLogin from './AuthLogin'
 import styles from './styles.module.css'
 import AuthRegister from './AuthRegister'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { ButtonIcon } from '@/components/ui/button'
 import { ArrowLeft } from 'lucide-react'
+import { Button } from '@/components/ui/button'
 
 export type mode = 
   "login" |
@@ -28,9 +28,9 @@ const AuthWrapper = () => {
   return (
     <div className={styles.auth}>
       <div className={styles.auth_main}>
-        <ButtonIcon onClick={handleMain} size="lg">
+        <Button onClick={handleMain} size="lg">
           <ArrowLeft />
-        </ButtonIcon>
+        </Button>
       </div>
       {
         mode === "login" 

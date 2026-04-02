@@ -3,7 +3,6 @@
 import AvatarCollection from '@/components/widgets/avatarCollection/AvatarCollection'
 import React, { useEffect, useRef, useState } from 'react'
 import styles from './styles.module.css'
-import { Button } from '@/components/ui/button'
 import { Edit, LogOutIcon, Trash2 } from 'lucide-react'
 import ModalUploadAvatar from '@/components/widgets/modal/modalUploadAvatar/ModalUploadAvatar'
 import { useMutation } from '@tanstack/react-query'
@@ -12,7 +11,7 @@ import { queryClient } from '@/lib/queryClient'
 import { uploadApi } from '@/lib/api/uploadApi'
 import { ICollection, ICollectionUpdate } from '@/types/collection.type'
 import { collectionApi } from '@/lib/api/collectionApi'
-import { ButtonIcon } from '@/components/ui/button'
+import { Button } from '@/components/ui/button'
 import Input from '@/components/ui/inputs/input/Input'
 
 interface Props {
@@ -105,9 +104,9 @@ const CollectionInfo = ({
                         {!isCollectionName && collectionName}
 
                         <div className={styles.info_btnEdit}>
-                            <ButtonIcon onClick={handleEditName} radius='md' size='md'>
+                            <Button onClick={handleEditName} >
                                 <Edit size={20}/>
-                            </ButtonIcon>
+                            </Button>
                         </div>
                     </div>  
                 </div>

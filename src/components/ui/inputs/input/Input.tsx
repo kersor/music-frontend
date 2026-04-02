@@ -3,8 +3,8 @@
 import React, { InputHTMLAttributes } from 'react'
 import styles from './styles.module.css'
 import clsx from 'clsx'
-import { ButtonIcon } from '@/components/ui/button'
 import { X } from 'lucide-react'
+import { Button } from '../../button'
 
 type variant = 
     "default" |
@@ -192,9 +192,9 @@ const Input = ({
                     {...otherProps}
                 />
                 {(clearButton && !!value.length) && (
-                    <ButtonIcon onClick={handleClearValue} size={size} variant="subtle">
+                    <Button onClick={handleClearValue} >
                         <X />
-                    </ButtonIcon>
+                    </Button>
                 )}
             </div>
 

@@ -1,4 +1,4 @@
-import { ChevronRight, EllipsisVertical, Heart, Pause, Play, Plus } from 'lucide-react'
+import { EllipsisVertical, Heart, Pause, Play, Plus } from 'lucide-react'
 import Image from 'next/image'
 import React, { memo, useState } from 'react'
 import styles from './styles.module.css'
@@ -6,8 +6,8 @@ import { IMusic } from '@/types/music.type'
 import { useChooseTrack } from '@/store/useChooseTrack'
 import clsx from 'clsx'
 import { formatTime } from '@/utils/format/formatTime'
-import { Button, ButtonIcon } from '@/components/ui/button'
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuPortal, DropdownMenuSeparator, DropdownMenuShortcut, DropdownMenuSub, DropdownMenuSubContent, DropdownMenuSubTrigger, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
+import { Button } from '@/components/ui/button'
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuPortal, DropdownMenuSub, DropdownMenuSubContent, DropdownMenuSubTrigger, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
 
 
 interface Props {
@@ -116,9 +116,11 @@ const Track = ({
                                 (isHover || isMenuOpen) ? styles.track_menu__visible : styles.track_menu__hidden
                             )}
                         >
-                            <DropdownMenu >
-                                <DropdownMenuTrigger >
-                                    <Button size='icon-lg' variant='secondary' ><EllipsisVertical size={18} /></Button>
+                            <DropdownMenu onOpenChange={setIsMenuOpen}>
+                                <DropdownMenuTrigger
+                                    render={<Button size='icon-lg' variant='secondary' />}
+                                >
+                                    <EllipsisVertical size={18} />
                                 </DropdownMenuTrigger>
                                 <DropdownMenuContent className="w-50 " align="start">
                                     <DropdownMenuSub>

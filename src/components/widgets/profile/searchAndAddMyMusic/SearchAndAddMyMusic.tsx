@@ -3,9 +3,9 @@
 import React, { useState } from 'react'
 import styles from './styles.module.css'
 import Input from '@/components/ui/inputs/input/Input'
-import { ButtonIcon } from '@/components/ui/button'
 import { ArrowUpFromLine } from 'lucide-react'
 import ModalUploadMusic from '../../modal/modalUploadMusic/ModalUploadMusic'
+import { Button } from '@/components/ui/button'
 
 const SearchAndAddMyMusic = () => {
     const [isOpen, setIsOpen] = useState(false)
@@ -15,9 +15,9 @@ const SearchAndAddMyMusic = () => {
             <div className='flex-1'>
                 <Input placeholder='Поиск музыки...' clearButton/>
             </div>
-            <ButtonIcon onClick={() => setIsOpen(true)} variant='light' size='lg'>
+            <Button onClick={() => setIsOpen(true)} size='lg'>
                 <ArrowUpFromLine />
-            </ButtonIcon>
+            </Button>
             <ModalUploadMusic isOpen={isOpen} onClose={() => setIsOpen(false)}/>
         </div>
     )
