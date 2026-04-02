@@ -1,11 +1,16 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, JetBrains_Mono, Outfit } from "next/font/google";
 import "./styles/globals.css";
 import Sidebar from "@/components/layout/sidebar/sidebarMain/SidebarMain";
 import ChooseTrack from "@/components/layout/chooseTrack/ChooseTrack";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { ProviderQueryClient } from "@/providers/ProviderQueryClient";
 import ClientUserLoader from "@/components/layout/clientUserLayout/ClientUserLayout";
+import { cn } from "@/lib/utils";
+
+const outfit = Outfit({subsets:['latin'],variable:'--font-sans'});
+
+const jetbrainsMono = JetBrains_Mono({subsets:['latin'],variable:'--font-mono'});
 
 const inter = Inter({
   subsets: ['cyrillic']
@@ -23,7 +28,7 @@ export default function RootLayout({
 }>) {
 
   return (
-    <html lang="en">
+    <html lang="en" className={cn( jetbrainsMono.variable, "font-sans", outfit.variable)}>
       <body className={`${inter.className} antialiased min-h-screen`}>
         <ProviderQueryClient>
           <ClientUserLoader />

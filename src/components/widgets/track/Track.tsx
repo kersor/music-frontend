@@ -118,7 +118,7 @@ const Track = ({
                         >
                             <DropdownMenu >
                                 <DropdownMenuTrigger >
-                                    <Button size='md'><EllipsisVertical size={18} /></Button>
+                                    <Button size='icon-lg' variant='secondary' ><EllipsisVertical size={18} /></Button>
                                 </DropdownMenuTrigger>
                                 <DropdownMenuContent className="w-50 " align="start">
                                     <DropdownMenuSub>
