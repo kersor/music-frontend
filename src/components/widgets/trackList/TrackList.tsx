@@ -17,6 +17,7 @@ const TrackList = ({
     musics
 }: Props) => { 
     const router = useRouter()
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const [collections, setCollections] = useState<any[]>([])
     
     const trackId = useChooseTrack(state => state.track?.id)

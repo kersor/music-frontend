@@ -18,6 +18,7 @@ import {
 } from '@/components/ui/dropdown-menu/DropdownMenu'
 
 interface Props {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     collections: any[]
     music: IMusic
     playlist: IMusic[]
