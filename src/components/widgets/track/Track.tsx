@@ -6,16 +6,9 @@ import { IMusic } from '@/types/music.type'
 import { useChooseTrack } from '@/store/useChooseTrack'
 import clsx from 'clsx'
 import { formatTime } from '@/utils/format/formatTime'
-import { ButtonIcon } from '@/components/ui/button'
-import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuSub,
-    DropdownMenuSubContent,
-    DropdownMenuSubTrigger,
-    DropdownMenuTrigger
-} from '@/components/ui/dropdown-menu/DropdownMenu'
+import { Button, ButtonIcon } from '@/components/ui/button'
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuPortal, DropdownMenuSeparator, DropdownMenuShortcut, DropdownMenuSub, DropdownMenuSubContent, DropdownMenuSubTrigger, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
+
 
 interface Props {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -123,31 +116,28 @@ const Track = ({
                                 (isHover || isMenuOpen) ? styles.track_menu__visible : styles.track_menu__hidden
                             )}
                         >
-                            <DropdownMenu open={isMenuOpen} onOpenChange={setIsMenuOpen}>
-                                <DropdownMenuTrigger asChild>
-                                    <ButtonIcon size='md' classNames='rounded-lg!'>
-                                        <div>
-                                            <EllipsisVertical size={18} />
-                                        </div>
-                                    </ButtonIcon>
+                            <DropdownMenu >
+                                <DropdownMenuTrigger >
+                                    <Button size='md'><EllipsisVertical size={18} /></Button>
                                 </DropdownMenuTrigger>
-
-                                <DropdownMenuContent align='end' >
+                                <DropdownMenuContent className="w-50 " align="start">
                                     <DropdownMenuSub>
-                                        <DropdownMenuSubTrigger className='min-w-[250px]'>
-                                            Добавить в плейлист <ChevronRight />
+                                        <DropdownMenuSubTrigger >
+                                            Добавить в плейлист
                                         </DropdownMenuSubTrigger>
-                                        <DropdownMenuSubContent>
-                                            {collections.length > 0 ? (
-                                                collections.map(c => (
-                                                    <DropdownMenuItem onClick={() => {
-                                                        funcAddMusicInCollection(c.id, music.id)
-                                                    }} key={c.id}>{c.name}</DropdownMenuItem>
-                                                ))
-                                            ) : (
-                                                <DropdownMenuItem onClick={funcCreateNewCollection} className='flex min-w-[250px]'> <Plus /> Добавить новый плейлист</DropdownMenuItem>
-                                            )}
-                                        </DropdownMenuSubContent>
+                                        <DropdownMenuPortal>
+                                            <DropdownMenuSubContent>
+                                                {collections.length > 0 ? (
+                                                    collections.map(c => (
+                                                        <DropdownMenuItem onClick={() => {
+                                                            funcAddMusicInCollection(c.id, music.id)
+                                                        }} key={c.id}>{c.name}</DropdownMenuItem>
+                                                    ))
+                                                ) : (
+                                                    <DropdownMenuItem onClick={funcCreateNewCollection} className='flex min-w-[250px]'> <Plus /> Добавить новый плейлист</DropdownMenuItem>
+                                                )}
+                                            </DropdownMenuSubContent>
+                                        </DropdownMenuPortal>
                                     </DropdownMenuSub>
                                 </DropdownMenuContent>
                             </DropdownMenu>
