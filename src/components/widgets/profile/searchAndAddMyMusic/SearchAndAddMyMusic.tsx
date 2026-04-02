@@ -3,7 +3,7 @@
 import React, { useState } from 'react'
 import styles from './styles.module.css'
 import Input from '@/components/ui/inputs/input/Input'
-import { ButtonIcon } from '@/components/ui/button/ButtonIcon'
+import { ButtonIcon } from '@/components/ui/button'
 import { ArrowUpFromLine } from 'lucide-react'
 import ModalUploadMusic from '../../modal/modalUploadMusic/ModalUploadMusic'
 

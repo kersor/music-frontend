@@ -1,7 +1,7 @@
 "use client"
 
 import ChooseTrack from "@/components/layout/chooseTrack/ChooseTrack";
-import { Button } from "@/components/ui/button/Button";
+import { Button } from "@/components/ui/button";
 import InfoEmptyMusic from "@/components/widgets/info/infoEmptyMusic/InfoEmptyMusic";
 import Track from "@/components/widgets/track/Track";
 import TrackList from "@/components/widgets/trackList/TrackList";
@@ -38,3 +38,4 @@ export default function Home() {
     </div>
   );
 }
+

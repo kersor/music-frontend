@@ -1,7 +1,7 @@
 import Modal from '@/components/ui/modal/Modal'
 import React, { ChangeEvent, ChangeEventHandler, useRef, useState } from 'react'
 import styles from './styles.module.css'
-import { Button } from '@/components/ui/button/Button'
+import { Button } from '@/components/ui/button'
 import Image from 'next/image'
 import { api } from '@/lib/axios'
 import { useMutation } from '@tanstack/react-query'

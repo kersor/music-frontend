@@ -4,7 +4,7 @@ import AuthLogin from './AuthLogin'
 import styles from './styles.module.css'
 import AuthRegister from './AuthRegister'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { ButtonIcon } from '@/components/ui/button/ButtonIcon'
+import { ButtonIcon } from '@/components/ui/button'
 import { ArrowLeft } from 'lucide-react'
 
 export type mode = 
@@ -42,3 +42,4 @@ const AuthWrapper = () => {
 }
 
 export default AuthWrapper
+

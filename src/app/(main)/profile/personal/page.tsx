@@ -9,7 +9,7 @@ import { AxiosError } from 'axios';
 import { useUser } from '@/store/useUser';
 import { User } from '@/types/auth.type';
 import { queryClient } from '@/lib/queryClient';
-import { Button } from '@/components/ui/button/Button';
+import { Button } from '@/components/ui/button';
 import PersonalInfo from '@/components/widgets/profile/personalInfo/PersonalInfo';
 import Modal from '@/components/ui/modal/Modal';
 import { LogOutIcon, Trash2 } from 'lucide-react';
@@ -92,3 +92,4 @@ export default function Personal() {
     </div>
   );
 }
+

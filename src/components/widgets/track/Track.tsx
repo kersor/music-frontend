@@ -6,7 +6,7 @@ import { IMusic } from '@/types/music.type'
 import { useChooseTrack } from '@/store/useChooseTrack'
 import clsx from 'clsx'
 import { formatTime } from '@/utils/format/formatTime'
-import { ButtonIcon } from '@/components/ui/button/ButtonIcon'
+import { ButtonIcon } from '@/components/ui/button'
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -160,3 +160,4 @@ const Track = ({
 }
 
 export default memo(Track)
+

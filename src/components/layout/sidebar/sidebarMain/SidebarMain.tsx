@@ -1,4 +1,4 @@
-import { Button } from '@/components/ui/button/Button'
+import { Button } from '@/components/ui/button'
 import SidebarAuth from '@/components/widgets/sidebar/sidebarAuth/SidebarAuth'
 import SidebarLink from '@/components/widgets/sidebar/sidebarLink/SidebarLink'
 import { ListPagesConfig } from '@/config/pages'

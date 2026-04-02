@@ -1,6 +1,6 @@
 "use client"
 
-import { Button } from '@/components/ui/button/Button';
+import { Button } from '@/components/ui/button';
 import styles from './styles/styles.module.css'
 import { LoaderCircle } from "lucide-react";
 

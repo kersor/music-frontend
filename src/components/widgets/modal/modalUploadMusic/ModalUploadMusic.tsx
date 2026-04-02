@@ -1,7 +1,7 @@
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react'
 import styles from './styles.module.css'
 import Modal from '@/components/ui/modal/Modal'
-import { Button } from '@/components/ui/button/Button'
+import { Button } from '@/components/ui/button'
 import { MAX_IMAGE_SIZE_MB, MAX_MUSIC_SIZE_MB, MAX_MUSIC_SIZE_MB_CHUNK } from '@/constant/maxSize'
 import { nanoid } from 'nanoid';
 import { api } from '@/lib/axios'

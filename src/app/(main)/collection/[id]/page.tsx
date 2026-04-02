@@ -40,7 +40,8 @@ export default function Collection () {
 
         const getMusics = async () => {
             const musics = await collectionApi.getAllMusicInCollection(id)
-            const newMusics = musics.map(m => {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            const newMusics = musics.map((m: any) => {
                 return {
                     id: m.music.id,
                     name: m.music.name,
