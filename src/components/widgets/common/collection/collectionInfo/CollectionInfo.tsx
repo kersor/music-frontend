@@ -1,10 +1,10 @@
 "use client"
 
 import AvatarCollection from '@/components/widgets/avatarCollection/AvatarCollection'
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import styles from './styles.module.css'
 import { Button } from '@/components/ui/button/Button'
-import { LogOutIcon, Trash2 } from 'lucide-react'
+import { Edit, LogOutIcon, Trash2 } from 'lucide-react'
 import ModalUploadAvatar from '@/components/widgets/modal/modalUploadAvatar/ModalUploadAvatar'
 import { useMutation } from '@tanstack/react-query'
 import { userApi } from '@/lib/api/userApi'
@@ -12,6 +12,8 @@ import { queryClient } from '@/lib/queryClient'
 import { uploadApi } from '@/lib/api/uploadApi'
 import { ICollection, ICollectionUpdate } from '@/types/collection.type'
 import { collectionApi } from '@/lib/api/collectionApi'
+import { ButtonIcon } from '@/components/ui/button/ButtonIcon'
+import Input from '@/components/ui/inputs/input/Input'
 
 interface Props {
     collection: ICollection
@@ -20,7 +22,11 @@ interface Props {
 const CollectionInfo = ({
     collection
 }: Props) => {
+    const [isCollectionName, setIsCollectionName] = useState(false)
+    const [collectionName, setCollectionName] = useState(collection.name)
     const [changeAvatar, setChangeAvatar] = useState(false)
+
+    const ref = useRef<HTMLInputElement | null>(null)
 
     const mutationUpdateCollection = useMutation({
         mutationKey: ['Collection'],
@@ -53,13 +59,57 @@ const CollectionInfo = ({
         await mutationSavePhoto.mutateAsync(file)
     }
 
+    const handleEditName = () => {
+        setIsCollectionName(true)
+    }
+
+    const handleOnBlur = async () => {
+        if (!ref?.current) return
+
+        const payload: ICollectionUpdate = {
+            ...collection,
+            name: collectionName
+        }
+
+        await mutationUpdateCollection.mutateAsync(payload)
+        setIsCollectionName(false)
+    }
+ 
+    useEffect(() => {
+        if (!ref?.current) return
+        if (isCollectionName) ref?.current?.focus();
+    }, [isCollectionName])
+
+
     return (
         <div className='flex gap-5'>
             <AvatarCollection link={collection.image ?? ""} />
             <div className={styles.info}>
                 <div>
                     <div className={styles.info_type}>Плейлист</div>
-                    <div className={styles.info_name}>{collection.name}</div>
+                    <div className={styles.info_name}>
+                        <input
+                            ref={ref}
+                            autoComplete='off'
+                            name='name'
+                            type="text"
+                            onChange={(e) => setCollectionName(e.target.value)}
+                            onBlur={handleOnBlur}
+                            value={collectionName}
+                            style={{
+                                width: '100%',
+                                display: isCollectionName ? 'block' : 'none'
+                            }}
+                        />
+
+                        {!isCollectionName && collectionName}
+
+                        <div className={styles.info_btnEdit}>
+                            <ButtonIcon onClick={handleEditName} radius='md' size='md'>
+                                <Edit size={20}/>
+                            </ButtonIcon>
+                        </div>
+                    </div>  
                 </div>
                 <div className={styles.profile_avatar__settings}>
                     <div className='flex gap-2'>
