@@ -7,6 +7,8 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { ProviderQueryClient } from "@/providers/ProviderQueryClient";
 import ClientUserLoader from "@/components/layout/clientUserLayout/ClientUserLayout";
 import { cn } from "@/lib/utils";
+import { useTheme } from "@/store/useTheme";
+import ThemeProvider from "@/providers/ThemeProvider";
 
 const outfit = Outfit({subsets:['latin'],variable:'--font-sans'});
 
@@ -26,13 +28,15 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
+  
   return (
-    <html lang="en" className={cn( jetbrainsMono.variable, "font-sans", outfit.variable)}>
-      <body className={`${inter.className} antialiased min-h-screen`}>
+    <html lang="en" className={cn( jetbrainsMono.variable, "font-sans", outfit.variable, )}>
+      <body className={`${inter.className} antialiased min-h-screen` }>
         <ProviderQueryClient>
-          <ClientUserLoader />
-          {children}
+          <ThemeProvider>
+            <ClientUserLoader />
+            {children}
+          </ThemeProvider>
         </ProviderQueryClient>
       </body>
     </html>

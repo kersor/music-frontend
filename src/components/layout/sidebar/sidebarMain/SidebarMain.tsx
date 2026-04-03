@@ -2,13 +2,17 @@ import { Button } from '@/components/ui/button'
 import SidebarAuth from '@/components/widgets/sidebar/sidebarAuth/SidebarAuth'
 import SidebarLink from '@/components/widgets/sidebar/sidebarLink/SidebarLink'
 import { ListPagesConfig } from '@/config/pages'
-import { X } from 'lucide-react'
+import { Moon, Sun, X } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
 import styles from './styles.module.css'
 import { headers } from 'next/headers'
+import { Switch } from '@/components/ui/switch'
+import { Label } from '@/components/ui/label'
+import { useTheme } from '@/store/useTheme'
 
-const SidebarMain = async () => {
+const SidebarMain = () => {
+ 
   return (
     <aside className={styles.sidebar}>
       <div className='h-full flex flex-col justify-between items-start'>
