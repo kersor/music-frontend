@@ -1,8 +1,8 @@
-"use client"
+﻿"use client"
 
 import React, { useState } from 'react'
 import styles from './styles.module.css'
-import Input from '@/components/ui/inputs/input/Input'
+import { Input } from '@/components/ui/input'
 import { ArrowUpFromLine } from 'lucide-react'
 import ModalUploadMusic from '../../modal/modalUploadMusic/ModalUploadMusic'
 import { Button } from '@/components/ui/button'
@@ -13,7 +13,7 @@ const SearchAndAddMyMusic = () => {
     return (
         <div className={styles.wrapper}>
             <div className='flex-1'>
-                <Input placeholder='Поиск музыки...' clearButton/>
+                <Input placeholder='Поиск музыки...'/>
             </div>
             <Button onClick={() => setIsOpen(true)} size='lg'>
                 <ArrowUpFromLine />
@@ -24,3 +24,4 @@ const SearchAndAddMyMusic = () => {
 }
 
 export default SearchAndAddMyMusic
+

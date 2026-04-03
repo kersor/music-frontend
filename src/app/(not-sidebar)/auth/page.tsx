@@ -2,7 +2,7 @@ import AuthWrapper from '@/components/widgets/auth/AuthWrapper';
 
 export default function Auth () {
     return (
-        <div className="relative">
+        <div className="page-auth">
             <AuthWrapper />
         </div>
     )

@@ -6,6 +6,7 @@ import ChooseTrack from "@/components/layout/chooseTrack/ChooseTrack";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { ProviderQueryClient } from "@/providers/ProviderQueryClient";
 import ClientUserLoader from "@/components/layout/clientUserLayout/ClientUserLayout";
+import GlobalAlert from "@/components/layout/globalAlert/GlobalAlert";
 import { cn } from "@/lib/utils";
 import { useTheme } from "@/store/useTheme";
 import ThemeProvider from "@/providers/ThemeProvider";
@@ -37,6 +38,7 @@ export default function RootLayout({
           <ThemeProvider>
             <SidebarProvider>
               <ClientUserLoader />
+              <GlobalAlert />
               {children}
             </SidebarProvider>
           </ThemeProvider>

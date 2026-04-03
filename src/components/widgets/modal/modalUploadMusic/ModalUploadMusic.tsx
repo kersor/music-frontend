@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, useRef, useState } from 'react'
+﻿import React, { ChangeEvent, useEffect, useRef, useState } from 'react'
 import styles from './styles.module.css'
 import Modal from '@/components/ui/modal/Modal'
 import { Button } from '@/components/ui/button'
@@ -7,14 +7,14 @@ import { nanoid } from 'nanoid';
 import { api } from '@/lib/axios'
 import * as uuid from 'uuid'
 import { useUser } from '@/store/useUser'
-import Input from '@/components/ui/inputs/input/Input'
+import { Input } from '@/components/ui/input'
 import FileInput from '@/components/ui/inputs/fileInput/FileInput'
 import { validImageMimeTypes } from '@/config/validImageTypes'
 import { useMutation } from '@tanstack/react-query'
 import { uploadApi } from '@/lib/api/uploadApi'
 import { musicApi } from '@/lib/api/musicApi'
 import * as yup from 'yup'
-import Alert from '@/components/ui/alert/Alert'
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { alertEmmiter } from '@/lib/alert'
 import { queryClient } from '@/lib/queryClient'
 import { Spinner } from '@/components/ui/spinner'
@@ -190,29 +190,26 @@ const ModalUploadMusic = ({
             title='Выберите аудиозапись на вашем компьютере'
         >
             <div className={styles.wrapper}>
-                <Alert />
-                <div className={styles.music_title}>
-                    Аудиофайл не должен превышать 200 МБ и должен быть в формате MP3.
-                </div>
+                <Alert>
+                    <AlertTitle>Важно</AlertTitle>
+                    <AlertDescription>
+                        Аудиофайл не должен превышать 200 МБ и должен быть в формате MP3.
+                    </AlertDescription>
+                </Alert>
                 <div className={styles.music_inputs}>
                     <div className={styles.music_inputs__line}>
                         <Input
-                            error={errors.name}
                             onChange={handleOnChangeName}
                             value={form.name}
-                            fullWidth
-                            label='Название'
                         />
+                        {errors.name && <span className='text-xs text-destructive'>{errors.name}</span>}
                     </div>
                     <div className={styles.music_inputs__line}>
                         <FileInput
-                            error={errors.photoValue}
-                            fullWidth
-                            label='Обложка'
-                            clearButton
                             value={form.photoValue}
                             onChange={handleOnChangePhoto}
                         />
+                        {errors.photoValue && <span className='text-xs text-destructive'>{errors.photoValue}</span>}
                     </div>
                 </div>
                 <Button disabled={isLoading} onClick={handleChooseFile}>
@@ -226,3 +223,5 @@ const ModalUploadMusic = ({
 }
 
 export default ModalUploadMusic
+
+

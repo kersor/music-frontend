@@ -26,9 +26,9 @@ const AuthWrapper = () => {
 
 
   return (
-    <div className={styles.auth}>
-      <div className={styles.auth_main}>
-        <Button onClick={handleMain} size="lg">
+    <div className='w-full h-full'>
+      <div className='absolute top-5 left-5'>
+        <Button onClick={handleMain} size="icon-lg" classNames='cursor-pointer'>
           <ArrowLeft />
         </Button>
       </div>

@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import AvatarCollection from '@/components/widgets/avatarCollection/AvatarCollection'
 import React, { useEffect, useRef, useState } from 'react'
@@ -12,7 +12,6 @@ import { uploadApi } from '@/lib/api/uploadApi'
 import { ICollection, ICollectionUpdate } from '@/types/collection.type'
 import { collectionApi } from '@/lib/api/collectionApi'
 import { Button } from '@/components/ui/button'
-import Input from '@/components/ui/inputs/input/Input'
 
 interface Props {
     collection: ICollection
@@ -138,3 +137,4 @@ const CollectionInfo = ({
 }
 
 export default CollectionInfo
+

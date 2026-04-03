@@ -14,7 +14,7 @@ const SidebarAuth = async () => {
 
   return (
     <div className="flex w-full">
-      <Button className="w-full">
+      <Button className="w-full cursor-pointer">
         <Link href={`${ListPagesConfig.AUTH.href}?mode=login`}>Войти</Link>
       </Button>
     </div>
