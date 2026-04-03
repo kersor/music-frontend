@@ -3,5 +3,6 @@
     grid-template-columns: repeat(4, minmax(0, 1fr));
     height: 100%;
     width: 100%;
-    gap: var(--offset-total-main);
+    gap: 12px;
+    position: relative;
 }

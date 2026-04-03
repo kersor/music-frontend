@@ -1,6 +1,5 @@
 "use client"
 
-import Avatar from '@/components/widgets/avatar/Avatar';
 import styles from './styles.module.css'
 import { useState } from 'react';
 import { api } from '@/lib/axios';
@@ -17,6 +16,9 @@ import ModalUploadAvatar from '@/components/widgets/modal/modalUploadAvatar/Moda
 import { userApi } from '@/lib/api/userApi';
 import { uploadApi } from '@/lib/api/uploadApi';
 import Link from 'next/link';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { AspectRatio } from '@/components/ui/aspect-ratio';
+import Image from 'next/image';
 
 export default function Personal() {
   const [changeAvatar, setChangeAvatar] = useState(false)
@@ -59,12 +61,18 @@ export default function Personal() {
         await mutationSavePhoto.mutateAsync(file)
     }
 
-  
+  const avatarUrl =
+  typeof user?.avatar === "string" && user.avatar.length > 0
+    ? `${process.env.NEXT_PUBLIC_BASE_URL}${process.env.NEXT_PUBLIC_BASE_MEDIA}/${user.avatar}` 
+    : "/photo/avatar-default.svg"
     
   return (
     <div className={styles.profile}>
       <div className={styles.profile_avatar}>
-        <Avatar size='lg'  />
+  
+        <AspectRatio ratio={1 / 1}>
+           <Image src={avatarUrl} alt="Image" className="rounded-md object-cover" width={200} height={200}/>
+        </AspectRatio>
         <div className={styles.profile_avatar__settings}>
           <div className='flex gap-2'>
             <Button onClick={() => setChangeAvatar(true)} size='xs' classNames='gap-2 items-center'>

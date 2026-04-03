@@ -1,6 +1,6 @@
 .sidebar {
     border: 1px solid var(--color-3);
-    background: var(--color-white);
+    background: var(--sidebar);
     
     border-radius: 10px;
     margin: var(--margin-main);

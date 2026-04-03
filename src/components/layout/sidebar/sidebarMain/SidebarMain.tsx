@@ -1,30 +1,51 @@
-import { Button } from '@/components/ui/button'
-import SidebarAuth from '@/components/widgets/sidebar/sidebarAuth/SidebarAuth'
-import SidebarLink from '@/components/widgets/sidebar/sidebarLink/SidebarLink'
-import { ListPagesConfig } from '@/config/pages'
-import { Moon, Sun, X } from 'lucide-react'
-import Link from 'next/link'
-import React from 'react'
-import styles from './styles.module.css'
-import { headers } from 'next/headers'
-import { Switch } from '@/components/ui/switch'
-import { Label } from '@/components/ui/label'
-import { useTheme } from '@/store/useTheme'
+import React from "react"
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarFooter,
+  SidebarGroup,
+  SidebarGroupContent,
+  SidebarHeader,
+  SidebarMenu,
+  SidebarMenuItem,
+} from "@/components/ui/sidebar"
+import SidebarAuth from "@/components/widgets/sidebar/sidebarAuth/SidebarAuth"
+import SidebarLink from "@/components/widgets/sidebar/sidebarLink/SidebarLink"
+import { ListPagesConfig } from "@/config/pages"
 
 const SidebarMain = () => {
- 
   return (
-    <aside className={styles.sidebar}>
-      <div className='h-full flex flex-col justify-between items-start'>
-        <div className='flex flex-col w-full'>
-          <SidebarLink href={ListPagesConfig.MAIN.href}>Главная</SidebarLink>
-          <SidebarLink href={ListPagesConfig.CONCERTS.href}>Концерты</SidebarLink>
-          <SidebarLink href={ListPagesConfig.NON_MUSIC.href}>Книги и подкасты</SidebarLink>
-          <SidebarLink href={ListPagesConfig.COLLECTIONS.href}>Коллекции</SidebarLink>
-        </div>
+    <Sidebar
+      collapsible="none"
+      className="my-5 h-[calc(100vh-(var(--margin-main)*2))] rounded-[10px] border border-sidebar-border bg-sidebar p-3"
+    >
+      <SidebarHeader className="px-0 pb-4 pt-0 text-center">
+        <div className="text-sm font-semibold text-sidebar-foreground/80 uppercase">kersor музыка</div>
+      </SidebarHeader>
+      <SidebarContent>
+        <SidebarGroup className="px-0 py-0">
+          <SidebarGroupContent>
+            <SidebarMenu>
+              <SidebarMenuItem>
+                <SidebarLink href={ListPagesConfig.MAIN.href}>Главная</SidebarLink>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
+                <SidebarLink href={ListPagesConfig.CONCERTS.href}>Концерты</SidebarLink>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
+                <SidebarLink href={ListPagesConfig.NON_MUSIC.href}>Книги и подкасты</SidebarLink>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
+                <SidebarLink href={ListPagesConfig.COLLECTIONS.href}>Коллекции</SidebarLink>
+              </SidebarMenuItem>
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+      </SidebarContent>
+      <SidebarFooter className="px-0 pt-4 pb-0">
         <SidebarAuth />
-      </div>
-    </aside>
+      </SidebarFooter>
+    </Sidebar>
   )
 }
 

@@ -9,6 +9,7 @@ import ClientUserLoader from "@/components/layout/clientUserLayout/ClientUserLay
 import { cn } from "@/lib/utils";
 import { useTheme } from "@/store/useTheme";
 import ThemeProvider from "@/providers/ThemeProvider";
+import { SidebarProvider } from "@/components/ui/sidebar";
 
 const outfit = Outfit({subsets:['latin'],variable:'--font-sans'});
 
@@ -34,8 +35,10 @@ export default function RootLayout({
       <body className={`${inter.className} antialiased min-h-screen` }>
         <ProviderQueryClient>
           <ThemeProvider>
-            <ClientUserLoader />
-            {children}
+            <SidebarProvider>
+              <ClientUserLoader />
+              {children}
+            </SidebarProvider>
           </ThemeProvider>
         </ProviderQueryClient>
       </body>
