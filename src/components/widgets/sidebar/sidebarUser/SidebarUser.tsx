@@ -21,12 +21,17 @@ const SidebarUser = () => {
     setTheme(theme === 'dark' ? 'light' : 'dark')
   }
 
+  const avatarUrl =
+    typeof user?.avatar === 'string' && user.avatar.length > 0
+      ? `${process.env.NEXT_PUBLIC_BASE_URL}${process.env.NEXT_PUBLIC_BASE_MEDIA}/${user.avatar}`
+      : '/photo/avatar-default.svg'
+
   return (
     <div className={styles.user}>
       <Link href={ListPagesConfig.PROFILE_PERSONAL.href} className={styles.avatar}>
         <Avatar size='lg'>
           <AvatarImage
-            src={`${process.env.NEXT_PUBLIC_BASE_URL}${process.env.NEXT_PUBLIC_BASE_MEDIA}/${user?.avatar}`}
+            src={avatarUrl}
             alt={user?.name}
           />
           <AvatarFallback>Avatar</AvatarFallback>

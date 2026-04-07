@@ -8,6 +8,7 @@ import clsx from 'clsx'
 import { formatTime } from '@/utils/format/formatTime'
 import { Button } from '@/components/ui/button'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuPortal, DropdownMenuSub, DropdownMenuSubContent, DropdownMenuSubTrigger, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
+import { Card, CardContent } from '@/components/ui/card'
 
 
 interface Props {
@@ -39,7 +40,7 @@ const Track = ({
         if (trackId !== music.id) {
             return (
                 <button onClick={() => funncTogglePlay(music, playlist)} className={styles.track_icon}>
-                    <div className='flex items-center justify-center w-full h-full rounded-full bg-white'>
+                    <div className='flex items-center justify-center w-full h-full rounded-full bg-card text-card-foreground'>
                         <Play size={15} />
                     </div>
                 </button>
@@ -57,7 +58,7 @@ const Track = ({
                 <div
                     className={clsx(
                         styles.track_icon__play,
-                        'rounded-full bg-white',
+                        'rounded-full bg-card',
                         isPlay ? 'opacity-100' : 'opacity-0'
                     )}
                 >
@@ -67,7 +68,7 @@ const Track = ({
                 <div
                     className={clsx(
                         styles.track_icon__hst,
-                        !isPlay && 'bg-white rounded-full'
+                        !isPlay && 'bg-card text-card-foreground rounded-full'
                     )}
                 >
                     {isPlay ? <Pause size={15} /> : <Play size={15} />}
@@ -77,77 +78,79 @@ const Track = ({
     }
 
     return (
-        <div
+        <Card
             onMouseEnter={() => setIsHover(true)}
             onMouseLeave={() => setIsHover(false)}
-            className={styles.track}
+            className={`${styles.track} transition-colors hover:bg-accent/40`}
         >
-            <div className='grid grid-cols-[90%_10%] items-center text-sm justify-between relative'>
-                <div className='flex gap-2'>
-                    <div className='relative w-10 h-10'>
-                        <Image
-                            src={`${process.env.NEXT_PUBLIC_BASE_URL}${process.env.NEXT_PUBLIC_BASE_MEDIA}/${music.image}`}
-                            alt='photo'
-                            fill
-                            objectFit='cover'
-                            className='rounded-md'
-                        />
-                        <IconPlay />
-                    </div>
-                    <div className='font-bold'>
-                        <div className=' text-[#504f4f]'>{music.name}</div>
-                        <div>{music.author.name}</div>
-                    </div>
-                </div>
-                <div className='flex items-center gap-5'>
-                    <Heart size={20} />
-                    <div className={styles.track_actions}>
-                        <div
-                            className={clsx(
-                                styles.track_time,
-                                (isHover || isMenuOpen) ? styles.track_time__hidden : styles.track_time__visible
-                            )}
-                        >
-                            {time}
+            <CardContent className='p-0'>
+                <div className='grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3 text-sm relative'>
+                    <div className='flex items-center gap-2 min-w-0'>
+                        <div className='relative w-10 h-10'>
+                            <Image
+                                src={`${process.env.NEXT_PUBLIC_BASE_URL}${process.env.NEXT_PUBLIC_BASE_MEDIA}/${music.image}`}
+                                alt='photo'
+                                fill
+                                objectFit='cover'
+                                className='rounded-md'
+                            />
+                            <IconPlay />
                         </div>
-                        <div
-                            className={clsx(
-                                styles.track_menu,
-                                (isHover || isMenuOpen) ? styles.track_menu__visible : styles.track_menu__hidden
-                            )}
-                        >
-                            <DropdownMenu onOpenChange={setIsMenuOpen}>
-                                <DropdownMenuTrigger
-                                    render={<Button size='icon-lg' variant='secondary' />}
-                                >
-                                    <EllipsisVertical size={18} />
-                                </DropdownMenuTrigger>
-                                <DropdownMenuContent className="w-50 " align="start">
-                                    <DropdownMenuSub>
-                                        <DropdownMenuSubTrigger >
-                                            Добавить в плейлист
-                                        </DropdownMenuSubTrigger>
-                                        <DropdownMenuPortal>
-                                            <DropdownMenuSubContent>
-                                                {collections.length > 0 ? (
-                                                    collections.map(c => (
-                                                        <DropdownMenuItem onClick={() => {
-                                                            funcAddMusicInCollection(c.id, music.id)
-                                                        }} key={c.id}>{c.name}</DropdownMenuItem>
-                                                    ))
-                                                ) : (
-                                                    <DropdownMenuItem onClick={funcCreateNewCollection} className='flex min-w-[250px]'> <Plus /> Добавить новый плейлист</DropdownMenuItem>
-                                                )}
-                                            </DropdownMenuSubContent>
-                                        </DropdownMenuPortal>
-                                    </DropdownMenuSub>
-                                </DropdownMenuContent>
-                            </DropdownMenu>
+                        <div className='font-bold min-w-0'>
+                            <div className='truncate'>{music.name}</div>
+                            <div className='truncate'>{music.author.name}</div>
                         </div>
                     </div>
+                    <div className='flex items-center gap-4 shrink-0'>
+                        <Heart size={20} />
+                        <div className={styles.track_actions}>
+                            <div
+                                className={clsx(
+                                    styles.track_time,
+                                    (isHover || isMenuOpen) ? styles.track_time__hidden : styles.track_time__visible
+                                )}
+                            >
+                                {time}
+                            </div>
+                            <div
+                                className={clsx(
+                                    styles.track_menu,
+                                    (isHover || isMenuOpen) ? styles.track_menu__visible : styles.track_menu__hidden
+                                )}
+                            >
+                                <DropdownMenu onOpenChange={setIsMenuOpen}>
+                                    <DropdownMenuTrigger
+                                        render={<Button className='rounded-full cursor-pointer text-inherit' size='icon-lg' />}
+                                    >
+                                        <EllipsisVertical size={18} />
+                                    </DropdownMenuTrigger>
+                                    <DropdownMenuContent className="w-50" align="start">
+                                        <DropdownMenuSub>
+                                            <DropdownMenuSubTrigger >
+                                                Добавить в плейлист
+                                            </DropdownMenuSubTrigger>
+                                            <DropdownMenuPortal>
+                                                <DropdownMenuSubContent>
+                                                    {collections.length > 0 ? (
+                                                        collections.map(c => (
+                                                            <DropdownMenuItem onClick={() => {
+                                                                funcAddMusicInCollection(c.id, music.id)
+                                                            }} key={c.id}>{c.name}</DropdownMenuItem>
+                                                        ))
+                                                    ) : (
+                                                        <DropdownMenuItem onClick={funcCreateNewCollection} className='flex min-w-[250px]'> <Plus /> Добавить новый плейлист</DropdownMenuItem>
+                                                    )}
+                                                </DropdownMenuSubContent>
+                                            </DropdownMenuPortal>
+                                        </DropdownMenuSub>
+                                    </DropdownMenuContent>
+                                </DropdownMenu>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
+            </CardContent>
+        </Card>
     )
 }
 

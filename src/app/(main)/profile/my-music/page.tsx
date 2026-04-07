@@ -30,7 +30,7 @@ export default function MyMusic() {
                     !musics.length ? (
                         <InfoEmptyMusic />
                     ) : (
-                        <TrackList musics={musics} />
+                        <TrackList musics={musics} classNames="flex flex-col gap-2" />
                     )
                 }
             </div>

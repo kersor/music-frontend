@@ -47,10 +47,9 @@ const AuthLogin = ({ handleMode }: Props) => {
       await schema.validate(login, { abortEarly: false })
 
       const res = await authApi.login(login)
-
+        console.log(res)
       if (!('error' in res)) {
-        const { access_token, ...otherUser } = res.data
-
+        const { access_token, ...otherUser } = res
         setCookie('access_token', access_token)
         setUser(otherUser)
         router.push('/')
@@ -80,7 +79,7 @@ const AuthLogin = ({ handleMode }: Props) => {
         })
         return
       }
-
+      console.log(err)
       showGlobalAlert({
         title: 'Ошибка',
         description: 'Произошла ошибка. Попробуйте снова.',

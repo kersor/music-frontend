@@ -15,7 +15,7 @@ const SearchAndAddMyMusic = () => {
             <div className='flex-1'>
                 <Input placeholder='Поиск музыки...'/>
             </div>
-            <Button onClick={() => setIsOpen(true)} size='lg'>
+            <Button classNames='cursor-pointer' onClick={() => setIsOpen(true)} size='icon'>
                 <ArrowUpFromLine />
             </Button>
             <ModalUploadMusic isOpen={isOpen} onClose={() => setIsOpen(false)}/>

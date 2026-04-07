@@ -6,7 +6,6 @@ import { Spinner } from '@/components/ui/spinner'
 import { Field, FieldError, FieldLabel } from '@/components/ui/field'
 import { useUser } from '@/store/useUser'
 import { User } from '@/types/auth.type'
-import { api } from '@/lib/axios'
 import { userApi } from '@/lib/api/userApi'
 
 type PersonalInfoForm = {
@@ -55,7 +54,7 @@ const PersonalInfo = () => {
         ...form,
       }
 
-      const { data } = await userApi.updateUser({id: user.id, data: payload})
+      const data = await userApi.updateUser({ id: user.id, data: payload })
       setUser(data)
     } catch (error) {
       console.error('Ошибка обновления профиля', error)
@@ -113,9 +112,6 @@ const PersonalInfo = () => {
         <Button disabled={loading} onClick={onClickUpdateUser} size="xs">
           Обновить данные
           {loading && <Spinner data-icon="inline-start" />}
-        </Button>
-        <Button variant="outline" size="xs">
-          Удалить
         </Button>
       </div>
     </div>

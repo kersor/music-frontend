@@ -11,10 +11,12 @@ import { useRouter } from 'next/navigation'
 
 interface Props {
     musics: IMusic[]
+    classNames?: string
 }
 
 const TrackList = ({
-    musics
+    musics,
+    classNames
 }: Props) => { 
     const router = useRouter()
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -75,7 +77,7 @@ const TrackList = ({
     if (!musics) return
 
     return (
-        <div>
+        <div className={classNames}>
             {
                 musics.length && musics.map((music) => (
                     <Track
