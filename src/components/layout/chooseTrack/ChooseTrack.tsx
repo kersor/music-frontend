@@ -83,16 +83,19 @@ const ChooseTrack = () => {
     if (track.track === null) return null
 
     return (
-      <div className='relative mt-auto mx-[var(--margin-main)] pt-3 p-2 flex items-center justify-between rounded-[10px] border border-foreground/10 bg-card text-card-foreground'>
+      <div className='relative mt-auto pt-3 p-2 flex items-center justify-between rounded-[10px] border border-foreground/10 bg-card text-card-foreground'>
         <input 
             ref={progressRef}
-            className='appearance-none absolute top-0 translate-y-[75%] w-[calc(100%-var(--margin-main))] h-[5px] bg-muted outline-none rounded-[10px] cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-0 [&::-webkit-slider-thumb]:h-0 [&::-webkit-slider-thumb]:bg-transparent'
+            className='appearance-none absolute top-0 translate-y-[75%] h-[5px] bg-muted outline-none rounded-[10px] cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-0 [&::-webkit-slider-thumb]:h-0 [&::-webkit-slider-thumb]:bg-transparent'
             type="range"
             min="0"
             max={track.options.duration}
             value={track.options.progress}
             onChange={handleProgress}
             step="0.1"
+            style={{
+              width: 'calc(100% - 16px)'
+            }}
         />
         <div className='flex items-center gap-2'>
           <div className='relative w-20 h-20'>
